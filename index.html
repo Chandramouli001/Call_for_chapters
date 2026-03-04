@@ -1,210 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TinyML-Enabled IoT Systems – Call for Book Chapters</title>
+<title>TinyML Enabled IoT Systems – Call for Book Chapters</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-body{
-font-family: Arial, sans-serif;
+*{
 margin:0;
-background:#f5f5f5;
-color:#333;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
-header{
-background:linear-gradient(135deg,#7b2cbf,#9d4edd);
+body{
+background:#f4f6ff;
+color:#333;
+line-height:1.6;
+}
+
+/* HERO */
+
+.hero{
+
+height:520px;
+
+background:
+linear-gradient(rgba(90,0,150,.85),rgba(150,60,200,.85)),
+url("https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0");
+
+background-size:cover;
+background-position:center;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+text-align:center;
 color:white;
 padding:40px;
-text-align:center;
+
 }
 
-header h1{
-margin:0;
-font-size:34px;
-}
-
-header p{
-font-size:18px;
-margin-top:10px;
-}
-
-.container{
-width:90%;
-max-width:1100px;
-margin:auto;
-padding:40px 0;
-}
-
-section{
-background:white;
-padding:30px;
-margin-bottom:25px;
-border-radius:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
-}
-
-h2{
-color:#7b2cbf;
+.hero h1{
+font-size:42px;
+max-width:900px;
 margin-bottom:15px;
 }
 
-ul{
-line-height:1.8;
+.hero p{
+font-size:20px;
+opacity:.9;
 }
 
-.editors{
-display:flex;
-flex-wrap:wrap;
-gap:20px;
+.btn{
+margin-top:25px;
+background:white;
+color:#6a0dad;
+padding:14px 28px;
+border-radius:30px;
+text-decoration:none;
+font-weight:600;
 }
+
+/* SECTION */
+
+section{
+padding:70px 10%;
+}
+
+section h2{
+text-align:center;
+color:#6a0dad;
+margin-bottom:40px;
+font-size:30px;
+}
+
+/* GRID */
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+
+}
+
+/* CARDS */
+
+.card{
+
+background:white;
+
+border-radius:12px;
+
+padding:25px;
+
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+
+transition:.3s;
+
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+/* TOPIC BOX */
+
+.topic-box{
+background:linear-gradient(135deg,#7b2cbf,#9d4edd);
+color:white;
+padding:30px;
+border-radius:10px;
+}
+
+.topic-box ul{
+columns:2;
+}
+
+/* EDITOR */
 
 .editor{
-flex:1 1 220px;
+
 text-align:center;
-background:#fafafa;
-padding:20px;
-border-radius:8px;
+
+background:white;
+
+padding:30px;
+
+border-radius:12px;
+
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+
 }
 
 .editor img{
-width:120px;
-height:120px;
+
+width:130px;
+
+height:130px;
+
 border-radius:50%;
+
 object-fit:cover;
+
+margin-bottom:15px;
+
+border:4px solid #9d4edd;
+
+}
+
+/* PUBLICATION LOGOS */
+
+.logos{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:40px;
+}
+
+.logos img{
+height:50px;
+}
+
+/* DATE BOX */
+
+.timeline{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+}
+
+.date{
+
+background:white;
+
+padding:25px;
+
+border-left:6px solid #9d4edd;
+
+border-radius:8px;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+
+}
+
+/* FEE */
+
+.fee-box{
+
+text-align:center;
+
+background:linear-gradient(135deg,#7b2cbf,#9d4edd);
+
+color:white;
+
+padding:50px;
+
+border-radius:12px;
+
+font-size:22px;
+
+}
+
+/* SUBMISSION */
+
+.submit{
+
+background:white;
+
+text-align:center;
+
+padding:50px;
+
+border-radius:12px;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+}
+
+.submit h3{
 margin-bottom:10px;
 }
 
-.fee{
-font-size:18px;
-font-weight:bold;
-color:#7b2cbf;
-}
+/* FOOTER */
 
 footer{
-text-align:center;
-padding:20px;
-background:#333;
-color:white;
-}
 
-.button{
-display:inline-block;
-padding:12px 22px;
-background:#7b2cbf;
+background:#1e1e1e;
+
 color:white;
-text-decoration:none;
-border-radius:5px;
-margin-top:10px;
+
+text-align:center;
+
+padding:30px;
+
 }
 
 </style>
+
 </head>
 
 <body>
 
-<header>
 
-<h1>TinyML-Enabled IoT Systems</h1>
+<!-- HERO -->
 
-<p>Recent Advancements in Tiny Machine Learning</p>
+<div class="hero">
+
+<h1>TinyML-Enabled IoT Systems: Recent Advancements in Tiny Machine Learning</h1>
 
 <p>Call for Book Chapters</p>
 
-</header>
+<a class="btn" href="#submit">Submit Chapter</a>
+
+</div>
 
 
-<div class="container">
 
+<!-- ABOUT -->
 
 <section>
 
-<h2>Aim and Scope</h2>
+<h2>About the Book</h2>
+
+<div class="grid">
+
+<div class="card">
 
 <p>
 
-The book <b>“TinyML-Enabled IoT Systems: Recent Advancements in Tiny Machine Learning”</b> aims to present the latest research developments at the intersection of Tiny Machine Learning (TinyML) and Internet of Things (IoT).  
+Tiny Machine Learning (TinyML) enables machine learning models to run on ultra-low power embedded devices and IoT systems.
 
-TinyML enables machine learning models to run directly on resource-constrained devices such as microcontrollers and embedded systems, enabling intelligent decision-making at the edge.
-
-This book will bring together researchers, engineers, and practitioners to share innovative methods, architectures, algorithms, and applications of TinyML in real-world IoT systems.
+This edited book presents the latest research developments, architectures, and applications of TinyML technologies across various domains including healthcare, smart cities, agriculture, and industrial IoT.
 
 </p>
 
+</div>
+
+<div class="card">
+
+<p>
+
+The book aims to bring together researchers, academicians, and industry professionals to share innovative ideas and real-world implementations in TinyML powered IoT systems.
+
+</p>
+
+</div>
+
+</div>
+
 </section>
 
 
+
+<!-- TOPICS -->
 
 <section>
 
-<h2>Key Topics (but not limited to)</h2>
+<h2>Key Topics</h2>
+
+<div class="topic-box">
 
 <ul>
 
-<li>Introduction to TinyML: Concepts, Motivation, and Use Cases</li>
-<li>Edge Intelligence for Resource-Constrained IoT Devices</li>
-<li>TinyML for Smart Healthcare and Remote Monitoring</li>
-<li>TinyML in Wearables and Body-Area Networks</li>
-<li>TinyML for Industrial IoT and Smart Agriculture</li>
-<li>Neural Network Architectures for Ultra-Low-Power Devices</li>
-<li>Model Optimization: Quantization, Pruning and Compression</li>
-<li>Energy Efficient Learning and Inference</li>
-<li>Deployment Challenges in TinyML Systems</li>
-<li>Security, Privacy and Trust in TinyML IoT Systems</li>
+<li>Introduction to TinyML</li>
+
+<li>Edge Intelligence for IoT Devices</li>
+
+<li>TinyML for Smart Healthcare</li>
+
+<li>TinyML in Wearables</li>
+
+<li>Industrial IoT Applications</li>
+
+<li>Smart Agriculture Systems</li>
+
+<li>Neural Networks for Ultra Low Power Devices</li>
+
+<li>Model Compression & Optimization</li>
+
+<li>Energy Efficient TinyML</li>
+
+<li>Security and Privacy in TinyML</li>
 
 </ul>
+
+</div>
 
 </section>
 
 
 
-<section>
-
-<h2>Publication and Indexing</h2>
-
-<ul>
-
-<li>Book available on <b>Amazon</b></li>
-<li>E-Book available on <b>Amazon Kindle</b></li>
-<li>E-Book available on <b>Google Play Books</b></li>
-<li>Each chapter will receive a <b>DOI through Zenodo</b></li>
-<li>Indexed in <b>OpenAIRE</b></li>
-<li>Chapters can be linked to <b>ORCID and Google Scholar</b></li>
-
-</ul>
-
-</section>
-
-
+<!-- EDITORS -->
 
 <section>
 
 <h2>Editors</h2>
 
-<div class="editors">
+<div class="grid">
 
 <div class="editor">
-<img src="editor1.jpg">
+
+<img src="https://chandramouli01.vercel.app/img/dp.png">
+
 <h3>Chandramouli Haldar</h3>
+
 <p>Independent Researcher</p>
+
 <p>NovaTech Innovative Solutions, India</p>
+
 </div>
 
+
 <div class="editor">
-<img src="editor2.jpg">
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_ZN0whhshnlBdXMDrAd1TLOXld4IXWInLE2njg0RzWw&s">
+
 <h3>Dr. Suparna Biswas</h3>
+
 <p>Associate Professor</p>
+
 <p>Guru Nanak Institute of Technology, India</p>
+
 </div>
 
+
 <div class="editor">
-<img src="editor3.jpg">
+
+<img src="https://media.licdn.com/dms/image/v2/D5603AQHENO8HTgYFVQ/profile-displayphoto-scale_400_400/B56ZrD7Do3JkAk-/0/1764223630450?e=2147483647&v=beta&t=PVJ6PQgHYzg1azmIOslWoMbjo32Fu8Fwf_-pLDpGz80">
+
 <h3>Dr. Rishi Jain</h3>
+
 <p>Program Director</p>
+
 <p>Asian Institute of Technology, Thailand</p>
+
 </div>
 
 </div>
@@ -212,99 +390,126 @@ This book will bring together researchers, engineers, and practitioners to share
 </section>
 
 
+
+<!-- PUBLICATION -->
+
+<section>
+
+<h2>Publication Platforms</h2>
+
+<div class="logos">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1280px-Amazon_logo.svg.png">
+
+<img src="https://wethesalesengineers.com/wp-content/uploads/2019/05/amazon-kindle-png-png-2272x1704-kindle-logo-transparent-background-2272.png">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Google_Play_Books.png">
+
+<img src="https://www.gphjournal.org/public/site/images/fran/OpenAIr.png">
+
+</div>
+
+</section>
+
+
+
+<!-- IMPORTANT DATES -->
 
 <section>
 
 <h2>Important Dates</h2>
 
-<ul>
+<div class="timeline">
 
-<li><b>Abstract Submission Deadline:</b> 31 March 2026</li>
+<div class="date">
 
-<li><b>Full Chapter Submission Deadline:</b> 30 April 2026</li>
+<h3>Abstract Submission</h3>
 
-</ul>
+<p>31 March 2026</p>
+
+</div>
+
+<div class="date">
+
+<h3>Full Chapter Submission</h3>
+
+<p>30 April 2026</p>
+
+</div>
+
+</div>
 
 </section>
 
 
+
+<!-- GUIDELINES -->
 
 <section>
 
 <h2>Author Guidelines</h2>
 
-<ul>
-
-<li>Chapters should be original and unpublished work.</li>
-
-<li>Recommended chapter length: <b>5000 – 8000 words</b>.</li>
-
-<li>Include abstract, keywords, introduction, methodology, results, and references.</li>
-
-<li>All submissions will go through editorial review.</li>
-
-<li>Proper citations and references must be included.</li>
-
-<li>Figures and tables should be clear and properly labelled.</li>
-
-</ul>
-
-</section>
-
-
-
-<section>
-
-<h2>Application / Publication Fee</h2>
-
-<p class="fee">
-
-INR 500 only
-
-</p>
-
-<p>
-
-The publication fee includes:
-
-</p>
+<div class="card">
 
 <ul>
 
-<li>Book chapter publication</li>
-<li>DOI for the chapter</li>
-<li>Indexing support</li>
-<li><b>One complimentary hardcopy of the book</b></li>
+<li>Original and unpublished research only</li>
+
+<li>Chapter length: 5000 – 8000 words</li>
+
+<li>Include abstract, keywords, methodology and references</li>
+
+<li>Figures and tables must be high quality</li>
+
+<li>Proper citations required</li>
+
+<li>Editorial review process will be followed</li>
 
 </ul>
-
-</section>
-
-
-
-<section>
-
-<h2>Submission</h2>
-
-<p>
-
-Send your chapter submission to:
-
-</p>
-
-<p>
-
-<b>editors.ratml2026@gmail.com</b>
-
-</p>
-
-<a class="button" href="mailto:editors.ratml2026@gmail.com">Submit Chapter</a>
-
-</section>
-
-
 
 </div>
+
+</section>
+
+
+
+<!-- FEE -->
+
+<section>
+
+<div class="fee-box">
+
+Publication Fee: INR 500  
+<br><br>
+
+Includes:
+
+• Book chapter publication  
+• DOI assignment through Zenodo  
+• OpenAIRE indexing  
+• One complimentary hard copy of the book  
+
+</div>
+
+</section>
+
+
+
+<!-- SUBMISSION -->
+
+<section id="submit">
+
+<div class="submit">
+
+<h2>Chapter Submission</h2>
+
+<h3>editors.ratml2026@gmail.com</h3>
+
+<a class="btn" href="mailto:editors.ratml2026@gmail.com">Submit Chapter</a>
+
+</div>
+
+</section>
 
 
 
