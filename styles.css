@@ -455,4 +455,39 @@ transform:scale(1.15);
 .submit h3{
 font-size:16px;
 }
+
+
+
+}
+
+
+/* EDITOR GRID FIX */
+
+.editors-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+/* Center the 4th editor card */
+.editors-grid .editor:last-child{
+grid-column:2 / 3;
+}
+
+/* Tablet */
+@media(max-width:900px){
+.editors-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.editors-grid .editor:last-child{
+grid-column:auto;
+}
+}
+
+/* Mobile */
+@media(max-width:600px){
+.editors-grid{
+grid-template-columns:1fr;
+}
 }
