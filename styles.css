@@ -491,3 +491,43 @@ grid-column:auto;
 grid-template-columns:1fr;
 }
 }
+
+.booked {
+  text-decoration: line-through;
+  color: #777;
+}
+/* ORDERED LIST STYLE */
+
+ol{
+list-style:none;
+counter-reset: step;
+padding-left:0;
+margin-top:10px;
+}
+
+ol li{
+counter-increment: step;
+padding:10px 0;
+padding-left:40px;
+position:relative;
+font-size:15px;
+}
+
+ol li::before{
+content: counter(step);
+position:absolute;
+left:0;
+top:50%;
+transform:translateY(-50%);
+width:26px;
+height:26px;
+background:#2563eb;
+color:#fff;
+font-weight:bold;
+font-size:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+box-shadow:0 3px 6px rgba(0,0,0,0.2);
+}
