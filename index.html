@@ -1,408 +1,971 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TinyML-Enabled IoT Systems – Call for Book Chapters</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --ink: #0a0e1a;
+      --ink2: #1a2240;
+      --sky: #1e6bff;
+      --sky2: #0d45c0;
+      --neon: #00e5ff;
+      --accent: #7c3aed;
+      --soft: #e8f0ff;
+      --muted: #8899bb;
+      --card-bg: #ffffff;
+      --bg: #f0f4ff;
+      --border: rgba(30,107,255,0.15);
+      --radius: 18px;
+      --shadow: 0 8px 40px rgba(30,107,255,0.10);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-    <title>TinyML Enabled IoT Systems – Call for Book Chapters</title>
+    html { scroll-behavior: smooth; }
 
-    <link rel="stylesheet" href="styles.css" />
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    /* ─── NAV ─────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 6%;
+      background: rgba(240,244,255,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 17px;
+      color: var(--sky);
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--ink); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 13.5px; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--sky); }
+    .nav-cta {
+      background: var(--sky); color: #fff;
+      border: none; border-radius: 50px;
+      padding: 9px 22px; font-size: 13.5px;
+      font-weight: 600; cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--sky2); transform: scale(1.04); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display:block; width:24px; height:2px; background: var(--ink); border-radius:2px; }
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 18px;
+      position: fixed; top:64px; left:0; right:0; z-index:99;
+      background: rgba(240,244,255,0.97);
+      backdrop-filter: blur(18px);
+      padding: 24px 8%;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--ink); text-decoration: none; }
+    @media(max-width:768px){
+      .nav-links,.nav-cta { display:none; }
+      .hamburger { display:flex; }
+    }
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-  </head>
+    /* ─── HERO ────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      padding: 120px 8% 80px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(30,107,255,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 85% 80%, rgba(124,58,237,0.10) 0%, transparent 60%),
+        var(--bg);
+    }
+    /* animated grid */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(30,107,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30,107,255,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at center, black 30%, transparent 80%);
+      animation: gridDrift 20s linear infinite;
+    }
+    @keyframes gridDrift { from { transform: translateY(0); } to { transform: translateY(60px); } }
 
-  <body>
-    <!-- HERO -->
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(30,107,255,0.10);
+      border: 1px solid rgba(30,107,255,0.25);
+      border-radius: 50px;
+      padding: 7px 16px;
+      font-size: 12.5px; font-weight: 600;
+      color: var(--sky);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      background: var(--neon);
+      border-radius: 50%;
+      animation: pulse 1.5s ease infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
 
-    <div class="hero">
-      <h1>
-        TinyML-Enabled IoT Systems: Recent Advancements in Tiny Machine Learning
-      </h1>
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(32px, 6vw, 68px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      color: var(--ink);
+      max-width: 860px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.7s 0.15s ease both;
+    }
+    .hero h1 .highlight {
+      color: var(--sky);
+      background: linear-gradient(135deg, var(--sky), var(--neon));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(15px,2vw,18px);
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 40px;
+      animation: fadeUp 0.7s 0.25s ease both;
+    }
+    .hero-actions {
+      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp 0.7s 0.35s ease both;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--sky), var(--sky2));
+      color: #fff;
+      padding: 14px 30px; border-radius: 50px;
+      font-weight: 600; font-size: 15px;
+      text-decoration: none;
+      box-shadow: 0 8px 28px rgba(30,107,255,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(30,107,255,0.45); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--ink);
+      padding: 14px 28px; border-radius: 50px;
+      font-weight: 500; font-size: 15px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--sky); color: var(--sky); transform: translateY(-3px); }
 
-      <p>Call for Book Chapters</p>
+    /* hero stats */
+    .hero-stats {
+      display: flex; gap: 48px; flex-wrap: wrap; justify-content: center;
+      margin-top: 64px;
+      animation: fadeUp 0.7s 0.45s ease both;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 32px; font-weight: 800;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--sky); }
+    .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin-top: 4px; }
+    .stat-div { width: 1px; background: var(--border); align-self: stretch; }
 
-      <a class="btn" href="#submit">Submit Abstract</a>
+    @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ─── SECTION COMMON ──────────────────── */
+    .section { padding: 96px 8%; max-width: 1280px; margin: auto; }
+    .section-tag {
+      display: inline-block;
+      background: var(--soft); color: var(--sky);
+      font-size: 11.5px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 50px;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(26px,4vw,42px);
+      font-weight: 800; letter-spacing: -1.5px;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+    .section-lead {
+      font-size: 16px; color: var(--muted);
+      max-width: 600px; margin-bottom: 56px;
+    }
+
+    /* ─── ABOUT ───────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    @media(max-width:768px){ .about-grid { grid-template-columns:1fr; } }
+    .about-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .about-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(30,107,255,0.14); }
+    .about-card img {
+      width: 100%; height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .about-card-body { padding: 28px; }
+    .about-card-body p { font-size: 15px; color: #444; text-align: left; }
+
+    /* ─── AIM ─────────────────────────────── */
+    .aim-section { background: var(--ink2); position: relative; overflow: hidden; border-radius: 24px; padding: 64px 7%; }
+    .aim-section::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(ellipse 70% 70% at 110% 50%, rgba(30,107,255,0.25) 0%, transparent 65%);
+    }
+    .aim-section .section-title { color: #fff; }
+    .aim-section .section-tag { background: rgba(255,255,255,0.1); color: var(--neon); }
+    .aim-text { font-size: 16px; color: rgba(255,255,255,0.72); max-width: 720px; line-height: 1.85; }
+
+    /* ─── TOPICS ──────────────────────────── */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
+    }
+    .topic-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 24px;
+      display: flex; align-items: flex-start; gap: 16px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .topic-card::before {
+      content:''; position:absolute; left:0; top:0; bottom:0;
+      width: 4px; background: var(--sky);
+      border-radius:4px 0 0 4px;
+      transition: width 0.2s;
+    }
+    .topic-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(30,107,255,0.12); border-color: rgba(30,107,255,0.3); }
+    .topic-card:hover::before { width: 6px; }
+    .topic-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px; font-weight: 800;
+      color: var(--sky);
+      min-width: 32px;
+    }
+    .topic-text { font-size: 14.5px; color: var(--ink); font-weight: 500; line-height: 1.5; }
+    .topic-booked {
+      text-decoration: line-through; color: var(--muted);
+    }
+    .booked-badge {
+      font-size: 11px; font-weight: 700;
+      background: #dcfce7; color: #16a34a;
+      padding: 2px 8px; border-radius: 50px;
+      margin-top: 4px; display: inline-block;
+    }
+
+    /* ─── EDITORS ─────────────────────────── */
+    .editors-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 28px;
+    }
+    @media(max-width:1000px){ .editors-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:600px){ .editors-grid { grid-template-columns: 1fr; } }
+    .editor-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .editor-card::after {
+      content: '';
+      position: absolute; top:0; left:0; right:0; height:4px;
+      background: linear-gradient(90deg, var(--sky), var(--neon));
+    }
+    .editor-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(30,107,255,0.12); }
+    .editor-avatar {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--sky);
+      margin-bottom: 16px;
+      box-shadow: 0 0 0 6px rgba(30,107,255,0.08);
+    }
+    .editor-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 17px; font-weight: 700;
+      color: var(--ink); margin-bottom: 4px;
+    }
+    .editor-role { font-size: 13px; color: var(--sky); font-weight: 600; margin-bottom: 2px; }
+    .editor-affil { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-bottom: 16px; }
+    .editor-links { display: flex; justify-content: center; gap: 12px; }
+    .editor-links a {
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; border: 1px solid var(--border);
+      color: var(--muted); font-size: 14px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .editor-links a:hover { background: var(--sky); color: #fff; border-color: var(--sky); }
+
+    /* ─── GUIDELINES ──────────────────────── */
+    .guidelines-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+    }
+    @media(max-width:768px){ .guidelines-grid { grid-template-columns:1fr; } }
+    .guide-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+    .guide-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px; font-weight: 700;
+      color: var(--ink); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .guide-card h3 i { color: var(--sky); }
+    .guide-list { list-style: none; }
+    .guide-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14.5px; color: #444;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(30,107,255,0.06);
+    }
+    .guide-list li:last-child { border-bottom: none; }
+    .guide-list li::before {
+      content: ''; flex-shrink: 0;
+      width: 6px; height: 6px;
+      background: var(--sky); border-radius: 50%;
+      margin-top: 8px;
+    }
+    .benefits-card {
+      background: linear-gradient(135deg, var(--ink), var(--ink2));
+      border-radius: var(--radius);
+      padding: 36px;
+      color: #fff;
+      position: relative; overflow: hidden;
+      grid-column: 1 / -1;
+    }
+    .benefits-card::before {
+      content:''; position:absolute; top:-50%; right:-10%;
+      width:350px; height:350px;
+      background: radial-gradient(circle, rgba(30,107,255,0.3) 0%, transparent 70%);
+    }
+    .benefits-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px; font-weight: 700;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .benefits-card h3 i { color: var(--neon); }
+    .benefits-card p { font-size: 15px; opacity: 0.82; line-height: 1.8; max-width:680px; }
+    .benefit-pills {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 20px;
+    }
+    .benefit-pill {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50px;
+      padding: 6px 16px; font-size: 13px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .benefit-pill i { color: var(--neon); font-size: 11px; }
+
+    /* ─── TIMELINE ────────────────────────── */
+    .timeline-wrap {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 20px;
+    }
+    @media(max-width:900px){ .timeline-wrap { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:500px){ .timeline-wrap { grid-template-columns: 1fr; } }
+    .date-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+      position: relative; overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .date-card:hover { transform: translateY(-4px); }
+    .date-card .step-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--soft);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 18px; color: var(--sky);
+    }
+    .date-card h3 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .date-card .date-val { font-size: 14px; color: var(--muted); }
+    .date-card.state-completed {
+      opacity: 0.65;
+      background: #f3f4f6;
+      border-color: #d1d5db;
+    }
+    .date-card.state-completed .step-icon { background: #e5e7eb; color: #9ca3af; }
+    .date-card.state-active {
+      border-color: var(--sky);
+      background: #eff6ff;
+      box-shadow: 0 8px 30px rgba(30,107,255,0.18);
+    }
+    .date-card.state-active .step-icon { background: var(--sky); color: #fff; }
+    .date-card.state-active::after {
+      content: 'NOW';
+      position: absolute; top: 12px; right: 14px;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.5px;
+      background: var(--sky); color: #fff;
+      padding: 2px 8px; border-radius: 50px;
+    }
+    .date-card.state-upcoming {
+      border-color: rgba(34,197,94,0.4);
+      background: #f0fdf4;
+    }
+    .date-card.state-upcoming .step-icon { background: #dcfce7; color: #16a34a; }
+
+    /* ─── PLATFORMS ───────────────────────── */
+    .platforms-row {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      align-items: center; gap: 40px;
+    }
+    .platform-item {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0.7; transition: opacity 0.2s, transform 0.2s;
+    }
+    .platform-item:hover { opacity: 1; transform: translateY(-3px); }
+    .platform-item img { height: 44px; object-fit: contain; }
+    .platform-item span { font-size: 12px; font-weight: 600; color: var(--muted); }
+
+    /* ─── SUBMIT ──────────────────────────── */
+    .submit-section {
+      background: linear-gradient(135deg, var(--sky), var(--accent));
+      border-radius: 24px;
+      padding: 72px 8%;
+      text-align: center;
+      color: #fff;
+      position: relative; overflow: hidden;
+    }
+    .submit-section::before {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse 60% 80% at 50% -20%, rgba(255,255,255,0.15) 0%, transparent 60%);
+    }
+    .submit-section h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(26px,4vw,40px);
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .submit-section p { font-size: 16px; opacity: 0.85; margin-bottom: 36px; }
+    .submit-email {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50px; padding: 12px 24px;
+      color: #fff; font-size: 15px; font-weight: 600;
+      margin-bottom: 32px;
+      backdrop-filter: blur(10px);
+    }
+    .submit-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff; color: var(--sky);
+      padding: 14px 28px; border-radius: 50px;
+      font-weight: 700; font-size: 15px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-white:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(0,0,0,0.2); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.6);
+      color: #fff;
+      padding: 13px 26px; border-radius: 50px;
+      font-weight: 600; font-size: 15px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.15); transform: translateY(-3px); }
+
+    /* ─── DOWNLOAD ────────────────────────── */
+    .download-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .download-wrap h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--ink); margin-bottom: 8px;
+    }
+    .download-wrap p { font-size: 14.5px; color: var(--muted); margin-bottom: 24px; }
+
+    /* ─── FOOTER ──────────────────────────── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      padding: 32px 8%;
+    }
+    footer p { font-size: 13.5px; }
+    footer .visitor-counter { margin-top: 12px; }
+
+    /* ─── SCROLL REVEAL ───────────────────── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Tiny<span>ML</span> Book</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#topics">Topics</a></li>
+    <li><a href="#editors">Editors</a></li>
+    <li><a href="#guidelines">Guidelines</a></li>
+    <li><a href="#dates">Dates</a></li>
+  </ul>
+  <a class="nav-cta" href="#submit">Submit Now</a>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#topics" onclick="closeMobile()">Topics</a>
+  <a href="#editors" onclick="closeMobile()">Editors</a>
+  <a href="#guidelines" onclick="closeMobile()">Guidelines</a>
+  <a href="#dates" onclick="closeMobile()">Important Dates</a>
+  <a href="#submit" onclick="closeMobile()">Submit Now</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><div class="dot"></div>Call for Book Chapters — 2026</div>
+  <h1>TinyML-Enabled <span class="highlight">IoT Systems</span><br>Recent Advancements</h1>
+  <p class="hero-sub">Submit your chapter to an internationally distributed edited book on Tiny Machine Learning and next-generation IoT edge intelligence.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#submit"><i class="fas fa-paper-plane"></i> Submit Abstract</a>
+    <a class="btn-outline" href="./Book_Chapter_Format.docx" download><i class="fas fa-download"></i> Download Template</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">10<span>+</span></div><div class="stat-label">Key Topics</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Expert Editors</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num">3<span>+</span></div><div class="stat-label">Distribution Channels</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num">DOI</div><div class="stat-label">via Zenodo</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about">
+<div class="section">
+  <div class="reveal">
+    <div class="section-tag">About the Book</div>
+    <h2 class="section-title">Advancing Edge Intelligence</h2>
+    <p class="section-lead">A curated collection of research and real-world applications at the intersection of machine learning and IoT.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-card reveal reveal-delay-1">
+      <img src="https://www.allaboutcircuits.com/uploads/thumbnails/what_is_tinyml_technical_article_thumbnail.jpg" alt="TinyML overview" />
+      <div class="about-card-body">
+        <p>Tiny Machine Learning (TinyML) enables intelligent ML models to run directly on ultra-low-power microcontrollers and edge IoT devices — bringing AI closer to the physical world without cloud dependency.</p>
+      </div>
+    </div>
+    <div class="about-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc" alt="IoT devices" />
+      <div class="about-card-body">
+        <p>This edited book presents cutting-edge contributions across healthcare, smart agriculture, wearable devices, industrial IoT, and beyond — bringing together researchers and practitioners from around the world.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- AIM -->
+<div class="section" style="padding-top:0;">
+  <div class="aim-section reveal">
+    <div class="section-tag">Aim & Scope</div>
+    <h2 class="section-title" style="margin-bottom:20px;">Why This Book Matters</h2>
+    <p class="aim-text">
+      This volume provides a platform for researchers, academicians, and industry professionals to share innovative architectures, deployment strategies, and real-world implementations of TinyML-enabled IoT systems. With a focus on resource-constrained embedded devices, the book bridges the gap between machine learning theory and practical edge deployment — covering everything from model compression to secure inference at the network edge.
+    </p>
+  </div>
+</div>
+
+<!-- TOPICS -->
+<div id="topics">
+<div class="section">
+  <div class="reveal">
+    <div class="section-tag">Topics Covered</div>
+    <h2 class="section-title">Key Research Areas</h2>
+    <p class="section-lead">10 focused chapters covering the full TinyML ecosystem. Booked topics are already assigned.</p>
+  </div>
+  <div class="topics-grid">
+
+    <div class="topic-card reveal reveal-delay-1">
+      <div class="topic-num">01</div>
+      <div>
+        <div class="topic-text topic-booked">Introduction to TinyML: Concepts, Motivation, and Use Cases</div>
+        <span class="booked-badge"><i class="fas fa-check"></i> Assigned</span>
+      </div>
     </div>
 
-    <!-- ABOUT -->
-
-    <section class="reveal">
-      <h2>About the Book</h2>
-
-      <div class="grid">
-        <div class="card">
-          <div class="image-box">
-            <img
-              src="https://www.allaboutcircuits.com/uploads/thumbnails/what_is_tinyml_technical_article_thumbnail.jpg"
-            />
-          </div>
-
-          <p>
-            Tiny Machine Learning (TinyML) enables machine learning models to
-            run directly on ultra-low power microcontrollers and IoT devices,
-            enabling intelligent edge computing.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="image-box">
-            <img
-              src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc"
-            />
-          </div>
-
-          <p>
-            This edited book presents research contributions and real-world
-            applications of TinyML across domains such as healthcare, smart
-            agriculture, wearable devices, and industrial IoT.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- AIM -->
-
-    <section class="reveal">
-      <h2>Aim & Scope</h2>
-
-      <div class="card">
-        <p>
-          The book aims to present recent advancements in Tiny Machine Learning
-          and its integration with IoT systems. TinyML enables machine learning
-          models to run on resource-constrained devices such as microcontrollers
-          and embedded systems, enabling efficient edge intelligence with
-          minimal power consumption.
-
-          <br /><br />
-
-          This edited volume provides a platform for researchers, academicians,
-          and industry professionals to share innovative architectures,
-          deployment strategies, and real-world implementations of
-          TinyML-enabled IoT systems.
-        </p>
-      </div>
-    </section>
-
-    <!-- TOPICS -->
-
-    <section class="reveal">
-      <h2>Key Topics</h2>
-
-      <div class="card">
-    <ol class="topic-list">
-          <li>
-                        <s>Introduction to TinyML: Concepts, Motivation, and Use Cases</s> <i class="fas fa-check-circle" style="color: green"></i>
-          </li>
-
-          <li>
-            Edge Intelligence and TinyML for Resource-Constrained IoT Devices
-          </li>
-
-          <li>
-            TinyML for Smart Healthcare: Remote Monitoring and Assistive Systems
-          </li>
-
-          <li>TinyML in Wearables and Body-Area Networks</li>
-
-          <li>
-            TinyML for Industrial IoT, Smart Agriculture and Home Automation
-          </li>
-
-          <li>Neural Network Architectures for Ultra-Low-Power Devices</li>
-
-          <li>
-            Model Optimization for TinyML: Quantization, Pruning, and
-            Compression
-          </li>
-
-          <li>Energy-Efficient Learning and Inference Techniques</li>
-
-          <li>Deployment Challenges and Design Strategies for TinyML</li>
-
-          <li> <s>Security, Privacy, and Trust in TinyML-Enabled IoT Systems</s> <i class="fas fa-check-circle" style="color: green"></i>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- DOWNLOAD -->
-
-    <section class="reveal">
-      <h2>Download Chapter Template</h2>
-
-      <div class="download">
-        <a class="btn" href="./Book_Chapter_Format.docx" download>
-          Download Book Chapter Format
-        </a>
-      </div>
-    </section>
-
-    <!-- EDITORS -->
-
-  <section class="reveal">
-  <h2>Editors</h2>
-
-  <div class="grid editors-grid">
-
-    <div class="card editor">
-      <img src="https://chandramouli01.vercel.app/img/dp.png" />
-
-      <h3>Chandramouli Haldar</h3>
-
-      <div class="editor-info">
-        <p class="editor-role">Independent Researcher</p>
-        <p class="editor-affiliation">
-          NovaTech Innovative Solutions, India
-        </p>
-      </div>
-
-      <div class="editor-links">
-        <a href="mailto:editors.ratml2026@gmail.com">
-          <i class="fas fa-envelope"></i>
-        </a>
-
-        <a href="https://www.linkedin.com/in/chandramouli01/" target="_blank">
-          <i class="fab fa-linkedin"></i>
-        </a>
-      </div>
+    <div class="topic-card reveal reveal-delay-1">
+      <div class="topic-num">02</div>
+       <div>
+      <div class="topic-text">Edge Intelligence and TinyML for Resource-Constrained IoT Devices</div>
+         <span class="booked-badge"><i class="fas fa-check"></i> Assigned</span>
     </div>
 
-    <div class="card editor">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_ZN0whhshnlBdXMDrAd1TLOXld4IXWInLE2njg0RzWw&s" />
-
-      <h3>Dr. Suparna Biswas</h3>
-
-      <div class="editor-info">
-        <p class="editor-role">Associate Professor</p>
-        <p class="editor-affiliation">
-          Guru Nanak Institute of Technology, India
-        </p>
-      </div>
-
-      <div class="editor-links">
-        <a href="mailto:editors.ratml2026@gmail.com">
-          <i class="fas fa-envelope"></i>
-        </a>
-
-        <a href="https://www.linkedin.com/in/suparna-biswas-9362721a6/" target="_blank">
-          <i class="fab fa-linkedin"></i>
-        </a>
-      </div>
+    <div class="topic-card reveal reveal-delay-2">
+      <div class="topic-num">03</div>
+      <div class="topic-text">TinyML for Smart Healthcare: Remote Monitoring and Assistive Systems</div>
     </div>
 
-    <div class="card editor">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKhiEGmpNe1Yo_x--qjwTjHi4_fBsG0Hyquw&s" />
-
-      <h3>Dr. Srabani Biswas</h3>
-
-      <div class="editor-info">
-        <p class="editor-role">Associate Professor</p>
-        <p class="editor-affiliation">
-          Guru Nanak Institute of Technology, India
-        </p>
-      </div>
-
-      <div class="editor-links">
-        <a href="mailto:editors.ratml2026@gmail.com">
-          <i class="fas fa-envelope"></i>
-        </a>
-
-        <a href="https://www.linkedin.com/in/dr-srabani-biswas-567392a4" target="_blank">
-          <i class="fab fa-linkedin"></i>
-        </a>
-      </div>
+    <div class="topic-card reveal reveal-delay-2">
+      <div class="topic-num">04</div>
+      <div class="topic-text">TinyML in Wearables and Body-Area Networks</div>
     </div>
 
-    <div class="card editor">
-      <img src="https://media.licdn.com/dms/image/v2/D5603AQHENO8HTgYFVQ/profile-displayphoto-scale_200_200/B56ZrD7Do3JkAc-/0/1764223630450?e=2147483647&v=beta&t=L7eHlWhxzrA8KtTg832eFCwqs9s6OKwOz86BPMCejqo" />
+    <div class="topic-card reveal reveal-delay-3">
+      <div class="topic-num">05</div>
+      <div class="topic-text">TinyML for Industrial IoT, Smart Agriculture and Home Automation</div>
+    </div>
 
-      <h3>Dr. Rishi Jain</h3>
+    <div class="topic-card reveal reveal-delay-3">
+      <div class="topic-num">06</div>
+      <div class="topic-text">Neural Network Architectures for Ultra-Low-Power Devices</div>
+    </div>
 
-      <div class="editor-info">
-        <p class="editor-role">Program Director</p>
-        <p class="editor-affiliation">
-          Asian Institute of Technology, Thailand
-        </p>
-      </div>
+    <div class="topic-card reveal reveal-delay-4">
+      <div class="topic-num">07</div>
+      <div class="topic-text">Model Optimization: Quantization, Pruning, and Compression</div>
+    </div>
 
-      <div class="editor-links">
-        <a href="mailto:editors.ratml2026@gmail.com">
-          <i class="fas fa-envelope"></i>
-        </a>
+    <div class="topic-card reveal reveal-delay-4">
+      <div class="topic-num">08</div>
+      <div class="topic-text">Energy-Efficient Learning and Inference Techniques</div>
+    </div>
 
-        <a href="https://www.linkedin.com/in/dr-rishi-jain-b27b3519a" target="_blank">
-          <i class="fab fa-linkedin"></i>
-        </a>
+    <div class="topic-card reveal reveal-delay-1">
+      <div class="topic-num">09</div>
+      <div class="topic-text">Deployment Challenges and Design Strategies for TinyML</div>
+    </div>
+
+    <div class="topic-card reveal reveal-delay-2">
+      <div class="topic-num">10</div>
+      <div>
+        <div class="topic-text topic-booked">Security, Privacy, and Trust in TinyML-Enabled IoT Systems</div>
+        <span class="booked-badge"><i class="fas fa-check"></i> Assigned</span>
       </div>
     </div>
 
   </div>
-</section>
-
-    <!-- GUIDELINES -->
-
-    <section class="reveal">
-      <h2>Submission Guidelines</h2>
-
-      <div class="info-box">
-        <h3>Author Guidelines</h3>
-
-        <ul>
-          <li>Chapter must be original and unpublished work.</li>
-          <li>Similarity index must be below 15%.</li>
-          <li>AI generated content must be 0%.</li>
-          <li>Minimum chapter length more than 10 pages.</li>
-          <li>Maximum number of authors 6.</li>
-          <li>Figures and tables must be clear.</li>
-          <li>Submit in Microsoft Word (.doc/.docx).</li>
-        </ul>
-      </div>
-
-      <div class="info-box">
-        <h3>Chapter Submission Procedure</h3>
-
-        <ul>
-          <li>Download chapter template from website.</li>
-          <li>Submit abstract (max 250 words) via email.</li>
-          <li>After abstract acceptance submit full chapter.</li>
-          <li>Chapter will undergo editorial review.</li>
-          <li>
-            After final acceptance submit camera ready chapter with plagiarism
-            and AI reports.
-          </li>
-        </ul>
-      </div>
-
-      <div class="benefits">
-        <h3>Author Benefits</h3>
-
-        <p>
-          All chapters will undergo peer review. The book will have an ISBN and
-          each chapter will receive DOI through Zenodo indexed in OpenAIRE. The
-          book will be distributed through Amazon, Kindle and Google Play Books
-          and one complimentary hard copy will be provided.
-        </p>
-      </div>
-    </section>
-
-    <!-- PUBLICATION -->
-    <section>
-      <h2>Publication Platforms</h2>
-      <div class="logos">
-        <img src="./files/amazon.png" />
-        <img src="./files/kindle.png" />
-        <img src="./files/playbooks.png" />
-        <img src="./files/zenodo.png" />
-        <img src="./files/openair.png" />
-      </div>
-    </section>
-
-    <!-- IMPORTANT DATES -->
-
-    <section class="reveal">
-      <h2>Important Dates</h2>
-
-      <div class="timeline">
-        <div class="date-box" data-date="2026-03-31">
-          <h3>Abstract Submission</h3>
-
-          <p>31 March 2026</p>
-        </div>
-
-        <div class="date-box" data-date="2026-04-15">
-          <h3>Full Chapter Submission</h3>
-
-          <p>15 April 2026</p>
-        </div>
-
-        <div class="date-box" data-date="2026-04-20">
-          <h3>Review Notification</h3>
-
-          <p>20 April 2026</p>
-        </div>
-
-        <div class="date-box" data-date="2026-04-30">
-          <h3>Camera Ready Submission</h3>
-
-          <p>30 April 2026</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SUBMIT -->
-
-    <section id="submit" class="reveal">
-      <h2>Submit Chapter</h2>
-      <h2>Submit Through Email or Google Forms</h2>
-
-      <div class="submit">
-        <h3>editors.ratml2026@gmail.com</h3>
-
-        <a class="btn" href="mailto:editors.ratml2026@gmail.com">
-          Submit using Email
-        </a>
-        <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSd6f6SIVh0BNiN_1DorTy8-u7EdgedVZkNq6R7DzpwoyaKnEQ/viewform?usp=header" target="_blank">
-          Submit using Google Gorms
-        </a>
-      </div>
-    </section>
-
-    <footer>
-
-<p>© 2026 TinyML Enabled IoT Systems</p>
-
-<div class="visitor-counter">
-<img src="https://visitor-badge.laobi.icu/badge?page_id=tinyml-book" />
+</div>
 </div>
 
+<!-- EDITORS -->
+<div id="editors" style="background:linear-gradient(180deg, var(--bg) 0%, #e8efff 100%); padding: 0;">
+<div class="section">
+  <div class="reveal">
+    <div class="section-tag">Editorial Board</div>
+    <h2 class="section-title">Meet the Editors</h2>
+    <p class="section-lead">Leading researchers and practitioners guiding this volume.</p>
+  </div>
+  <div class="editors-grid">
+
+    <div class="editor-card reveal reveal-delay-1">
+      <img class="editor-avatar" src="https://chandramouli01.vercel.app/img/dp.png" alt="Chandramouli Haldar" />
+      <div class="editor-name">Chandramouli Haldar</div>
+      <div class="editor-role">Independent Researcher</div>
+      <div class="editor-affil">NovaTech Innovative Solutions, India</div>
+      <div class="editor-links">
+        <a href="mailto:editors.ratml2026@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/chandramouli01/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+
+    <div class="editor-card reveal reveal-delay-2">
+      <img class="editor-avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_ZN0whhshnlBdXMDrAd1TLOXld4IXWInLE2njg0RzWw&s" alt="Dr. Suparna Biswas" />
+      <div class="editor-name">Dr. Suparna Biswas</div>
+      <div class="editor-role">Associate Professor</div>
+      <div class="editor-affil">Guru Nanak Institute of Technology, India</div>
+      <div class="editor-links">
+        <a href="mailto:editors.ratml2026@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/suparna-biswas-9362721a6/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+
+    <div class="editor-card reveal reveal-delay-3">
+      <img class="editor-avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKhiEGmpNe1Yo_x--qjwTjHi4_fBsG0Hyquw&s" alt="Dr. Srabani Biswas" />
+      <div class="editor-name">Dr. Srabani Biswas</div>
+      <div class="editor-role">Associate Professor</div>
+      <div class="editor-affil">Guru Nanak Institute of Technology, India</div>
+      <div class="editor-links">
+        <a href="mailto:editors.ratml2026@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/dr-srabani-biswas-567392a4" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+
+    <div class="editor-card reveal reveal-delay-4">
+      <img class="editor-avatar" src="https://media.licdn.com/dms/image/v2/D5603AQHENO8HTgYFVQ/profile-displayphoto-scale_200_200/B56ZrD7Do3JkAc-/0/1764223630450?e=2147483647&v=beta&t=L7eHlWhxzrA8KtTg832eFCwqs9s6OKwOz86BPMCejqo" alt="Dr. Rishi Jain" />
+      <div class="editor-name">Dr. Rishi Jain</div>
+      <div class="editor-role">Program Director</div>
+      <div class="editor-affil">Asian Institute of Technology, Thailand</div>
+      <div class="editor-links">
+        <a href="mailto:editors.ratml2026@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/dr-rishi-jain-b27b3519a" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- GUIDELINES -->
+<div id="guidelines">
+<div class="section">
+  <div class="reveal">
+    <div class="section-tag">Guidelines</div>
+    <h2 class="section-title">Submission Guidelines</h2>
+    <p class="section-lead">Everything you need to know before submitting your chapter.</p>
+  </div>
+  <div class="guidelines-grid">
+    <div class="guide-card reveal reveal-delay-1">
+      <h3><i class="fas fa-file-alt"></i> Author Guidelines</h3>
+      <ul class="guide-list">
+        <li>Chapter must be original and unpublished work</li>
+        <li>Similarity index must be below 15%</li>
+        <li>AI-generated content must be 0%</li>
+        <li>Minimum chapter length: more than 10 pages</li>
+        <li>Maximum number of authors: 6</li>
+        <li>Figures and tables must be clear and high resolution</li>
+        <li>Submit in Microsoft Word (.doc / .docx)</li>
+      </ul>
+    </div>
+    <div class="guide-card reveal reveal-delay-2">
+      <h3><i class="fas fa-tasks"></i> Submission Procedure</h3>
+      <ul class="guide-list">
+        <li>Download chapter template from this website</li>
+        <li>Submit abstract (max 250 words) via email or Google Form</li>
+        <li>Receive abstract acceptance notification</li>
+        <li>Submit full chapter after acceptance</li>
+        <li>Chapter undergoes editorial review process</li>
+        <li>Submit camera-ready chapter with plagiarism and AI reports</li>
+      </ul>
+    </div>
+    <div class="benefits-card reveal">
+      <h3><i class="fas fa-star"></i> Author Benefits</h3>
+      <p>All chapters undergo peer review. The book will have an ISBN and each chapter will receive a DOI through Zenodo, indexed in OpenAIRE. Distributed globally through major platforms with one complimentary hard copy provided to authors.</p>
+      <div class="benefit-pills">
+        <div class="benefit-pill"><i class="fas fa-check"></i> Peer Reviewed</div>
+        <div class="benefit-pill"><i class="fas fa-check"></i> ISBN Assigned</div>
+        <div class="benefit-pill"><i class="fas fa-check"></i> DOI via Zenodo</div>
+        <div class="benefit-pill"><i class="fas fa-check"></i> OpenAIRE Indexed</div>
+        <div class="benefit-pill"><i class="fas fa-check"></i> Amazon Distribution</div>
+        <div class="benefit-pill"><i class="fas fa-check"></i> Kindle & Google Play</div>
+        <div class="benefit-pill"><i class="fas fa-check"></i> Hard Copy Included</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- TEMPLATE DOWNLOAD -->
+<div class="section" style="padding-top:0;">
+  <div class="download-wrap reveal">
+    <i class="fas fa-file-word" style="font-size:40px;color:var(--sky);margin-bottom:12px;display:block;"></i>
+    <h3>Download Chapter Template</h3>
+    <p>Use the official template to format your chapter correctly before submission.</p>
+    <a class="btn-primary" href="./Book_Chapter_Format.docx" download>
+      <i class="fas fa-download"></i> Download .docx Template
+    </a>
+  </div>
+</div>
+
+<!-- PUBLICATION PLATFORMS -->
+<div class="section" style="padding-top:0;">
+  <div class="reveal" style="text-align:center;margin-bottom:40px;">
+    <div class="section-tag" style="margin:0 auto 14px;">Publication Platforms</div>
+    <h2 class="section-title">Where Your Chapter Will Appear</h2>
+  </div>
+  <div class="platforms-row reveal">
+    <div class="platform-item">
+      <img src="./files/amazon.png" alt="Amazon" />
+      <span>Amazon</span>
+    </div>
+    <div class="platform-item">
+      <img src="./files/kindle.png" alt="Kindle" />
+      <span>Kindle</span>
+    </div>
+    <div class="platform-item">
+      <img src="./files/playbooks.png" alt="Google Play Books" />
+      <span>Google Play Books</span>
+    </div>
+    <div class="platform-item">
+      <img src="./files/zenodo.png" alt="Zenodo" />
+      <span>Zenodo</span>
+    </div>
+    <div class="platform-item">
+      <img src="./files/openair.png" alt="OpenAIRE" />
+      <span>OpenAIRE</span>
+    </div>
+  </div>
+</div>
+
+<!-- IMPORTANT DATES -->
+<div id="dates">
+<div class="section">
+  <div class="reveal">
+    <div class="section-tag">Timeline</div>
+    <h2 class="section-title">Important Dates</h2>
+    <p class="section-lead">Stay on track with key submission and review milestones.</p>
+  </div>
+  <div class="timeline-wrap">
+    <div class="date-card reveal reveal-delay-1" data-date="2026-03-31">
+      <div class="step-icon"><i class="fas fa-file-signature"></i></div>
+      <h3>Abstract Submission</h3>
+      <div class="date-val">31 March 2026</div>
+    </div>
+    <div class="date-card reveal reveal-delay-2" data-date="2026-04-15">
+      <div class="step-icon"><i class="fas fa-book-open"></i></div>
+      <h3>Full Chapter Submission</h3>
+      <div class="date-val">15 April 2026</div>
+    </div>
+    <div class="date-card reveal reveal-delay-3" data-date="2026-04-20">
+      <div class="step-icon"><i class="fas fa-bell"></i></div>
+      <h3>Review Notification</h3>
+      <div class="date-val">20 April 2026</div>
+    </div>
+    <div class="date-card reveal reveal-delay-4" data-date="2026-04-30">
+      <div class="step-icon"><i class="fas fa-flag-checkered"></i></div>
+      <h3>Camera Ready Submission</h3>
+      <div class="date-val">30 April 2026</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SUBMIT -->
+<div id="submit" class="section">
+  <div class="submit-section reveal">
+    <h2>Ready to Contribute?</h2>
+    <p>Submit your abstract today and be part of a globally distributed research book on TinyML.</p>
+    <div class="submit-email"><i class="fas fa-envelope"></i> editors.ratml2026@gmail.com</div>
+    <div class="submit-btns">
+      <a class="btn-white" href="mailto:editors.ratml2026@gmail.com">
+        <i class="fas fa-envelope"></i> Submit via Email
+      </a>
+      <a class="btn-ghost" href="https://docs.google.com/forms/d/e/1FAIpQLSd6f6SIVh0BNiN_1DorTy8-u7EdgedVZkNq6R7DzpwoyaKnEQ/viewform?usp=header" target="_blank">
+        <i class="fab fa-google"></i> Submit via Google Form
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 TinyML-Enabled IoT Systems — All rights reserved.</p>
+  <div class="visitor-counter">
+    <img src="https://visitor-badge.laobi.icu/badge?page_id=tinyml-book" alt="visitor counter" />
+  </div>
 </footer>
 
-    <script>
-      /* SCROLL REVEAL */
+<script>
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
 
-      function reveal() {
-        let reveals = document.querySelectorAll(".reveal");
+  // DATE STATES
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const dateCards = document.querySelectorAll('.date-card[data-date]');
+  let firstUpcoming = true;
+  dateCards.forEach(card => {
+    const d = new Date(card.dataset.date);
+    d.setHours(0,0,0,0);
+    if(d < today) {
+      card.classList.add('state-completed');
+    } else if(d.getTime() === today.getTime() || (firstUpcoming && d >= today)) {
+      card.classList.add('state-active');
+      firstUpcoming = false;
+    } else {
+      card.classList.add('state-upcoming');
+    }
+  });
 
-        for (let i = 0; i < reveals.length; i++) {
-          let windowHeight = window.innerHeight;
-          let elementTop = reveals[i].getBoundingClientRect().top;
+  // MOBILE MENU
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  function closeMobile() { mobileMenu.classList.remove('open'); }
 
-          if (elementTop < windowHeight - 100) {
-            reveals[i].classList.add("active");
-          }
-        }
-      }
-
-      window.addEventListener("scroll", reveal);
-
-      /* DATE HIGHLIGHT */
-
-      const today = new Date();
-      const boxes = document.querySelectorAll(".date-box");
-
-      let upcoming = false;
-
-      boxes.forEach((box) => {
-        const date = new Date(box.dataset.date);
-
-        if (date < today) {
-          box.classList.add("completed");
-        } else if (!upcoming) {
-          box.classList.add("active");
-
-          upcoming = true;
-        } else {
-          box.classList.add("upcoming");
-        }
-      });
-    </script>
-  </body>
+  // NAV shadow on scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.boxShadow =
+      window.scrollY > 20 ? '0 4px 24px rgba(30,107,255,0.10)' : 'none';
+  });
+</script>
+</body>
 </html>
