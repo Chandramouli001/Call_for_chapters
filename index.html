@@ -1,974 +1,948 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TinyML-Enabled IoT Systems – Call for Book Chapters</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <style>
-    :root {
-      --ink: #0a0e1a;
-      --ink2: #1a2240;
-      --sky: #1e6bff;
-      --sky2: #0d45c0;
-      --neon: #00e5ff;
-      --accent: #7c3aed;
-      --soft: #e8f0ff;
-      --muted: #8899bb;
-      --card-bg: #ffffff;
-      --bg: #f0f4ff;
-      --border: rgba(30,107,255,0.15);
-      --radius: 18px;
-      --shadow: 0 8px 40px rgba(30,107,255,0.10);
-    }
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Call for Book Chapters — TinyML-Enabled IoT Systems: Recent Advances</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@500;700;900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --crimson: #C0170F;
+    --crimson-dark: #8B0F09;
+    --crimson-glow: rgba(192,23,15,0.18);
+    --gold: #E8A020;
+    --gold-light: #F5C855;
+    --ink: #0D0D0D;
+    --ink-soft: #1A1A1A;
+    --ash: #F5F2EE;
+    --ash-dark: #E8E3DC;
+    --text-muted: #5A5250;
+    --text-dim: #7A7270;
+    --white: #FFFFFF;
+    --scopus: #F47920;
+  }
 
-    html { scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+  html { scroll-behavior: smooth; }
 
-    /* ─── NAV ─────────────────────────────── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 6%;
-      background: rgba(240,244,255,0.85);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.3s;
-    }
-    .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 17px;
-      color: var(--sky);
-      letter-spacing: -0.5px;
-    }
-    .nav-logo span { color: var(--ink); }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a {
-      font-size: 13.5px; font-weight: 500;
-      color: var(--muted); text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--sky); }
-    .nav-cta {
-      background: var(--sky); color: #fff;
-      border: none; border-radius: 50px;
-      padding: 9px 22px; font-size: 13.5px;
-      font-weight: 600; cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .nav-cta:hover { background: var(--sky2); transform: scale(1.04); }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .hamburger span { display:block; width:24px; height:2px; background: var(--ink); border-radius:2px; }
-    .mobile-menu {
-      display: none; flex-direction: column; gap: 18px;
-      position: fixed; top:64px; left:0; right:0; z-index:99;
-      background: rgba(240,244,255,0.97);
-      backdrop-filter: blur(18px);
-      padding: 24px 8%;
-      border-bottom: 1px solid var(--border);
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-size: 15px; font-weight: 500; color: var(--ink); text-decoration: none; }
-    @media(max-width:768px){
-      .nav-links,.nav-cta { display:none; }
-      .hamburger { display:flex; }
-    }
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--ash);
+    color: var(--ink);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
 
-    /* ─── HERO ────────────────────────────── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      text-align: center;
-      padding: 120px 8% 80px;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(30,107,255,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 50% at 85% 80%, rgba(124,58,237,0.10) 0%, transparent 60%),
-        var(--bg);
-    }
-    /* animated grid */
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(30,107,255,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(30,107,255,0.06) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 80% 80% at center, black 30%, transparent 80%);
-      animation: gridDrift 20s linear infinite;
-    }
-    @keyframes gridDrift { from { transform: translateY(0); } to { transform: translateY(60px); } }
+  /* ── HERO ─────────────────────────────────────────────────── */
+  .hero {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+  }
 
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(30,107,255,0.10);
-      border: 1px solid rgba(30,107,255,0.25);
-      border-radius: 50px;
-      padding: 7px 16px;
-      font-size: 12.5px; font-weight: 600;
-      color: var(--sky);
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-      animation: fadeUp 0.7s ease both;
-    }
-    .hero-badge .dot {
-      width: 7px; height: 7px;
-      background: var(--neon);
-      border-radius: 50%;
-      animation: pulse 1.5s ease infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+  .hero-noise {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
 
-    .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(32px, 6vw, 68px);
-      font-weight: 800;
-      line-height: 1.08;
-      letter-spacing: -2px;
-      color: var(--ink);
-      max-width: 860px;
-      margin-bottom: 24px;
-      animation: fadeUp 0.7s 0.15s ease both;
-    }
-    .hero h1 .highlight {
-      color: var(--sky);
-      background: linear-gradient(135deg, var(--sky), var(--neon));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      font-size: clamp(15px,2vw,18px);
-      color: var(--muted);
-      max-width: 560px;
-      margin-bottom: 40px;
-      animation: fadeUp 0.7s 0.25s ease both;
-    }
-    .hero-actions {
-      display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
-      animation: fadeUp 0.7s 0.35s ease both;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: linear-gradient(135deg, var(--sky), var(--sky2));
-      color: #fff;
-      padding: 14px 30px; border-radius: 50px;
-      font-weight: 600; font-size: 15px;
-      text-decoration: none;
-      box-shadow: 0 8px 28px rgba(30,107,255,0.35);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(30,107,255,0.45); }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent;
-      border: 1.5px solid var(--border);
-      color: var(--ink);
-      padding: 14px 28px; border-radius: 50px;
-      font-weight: 500; font-size: 15px;
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s, transform 0.2s;
-    }
-    .btn-outline:hover { border-color: var(--sky); color: var(--sky); transform: translateY(-3px); }
+  /* animated circuit lines */
+  .hero-lines {
+    position: absolute; inset: 0; z-index: 0; overflow: hidden;
+  }
+  .hero-lines svg {
+    width: 100%; height: 100%; opacity: 0.12;
+  }
 
-    /* hero stats */
-    .hero-stats {
-      display: flex; gap: 48px; flex-wrap: wrap; justify-content: center;
-      margin-top: 64px;
-      animation: fadeUp 0.7s 0.45s ease both;
-    }
-    .stat { text-align: center; }
-    .stat-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 32px; font-weight: 800;
-      color: var(--ink);
-      line-height: 1;
-    }
-    .stat-num span { color: var(--sky); }
-    .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin-top: 4px; }
-    .stat-div { width: 1px; background: var(--border); align-self: stretch; }
+  .hero-gradient {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 30%, rgba(192,23,15,0.35) 0%, transparent 65%),
+                radial-gradient(ellipse 40% 50% at 20% 80%, rgba(232,160,32,0.12) 0%, transparent 60%),
+                linear-gradient(180deg, #0D0D0D 0%, #140808 60%, #1A0A04 100%);
+  }
 
-    @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 1100px; margin: 0 auto;
+    padding: 80px 40px 64px;
+  }
 
-    /* ─── SECTION COMMON ──────────────────── */
-    .section { padding: 96px 8%; max-width: 1280px; margin: auto; }
-    .section-tag {
-      display: inline-block;
-      background: var(--soft); color: var(--sky);
-      font-size: 11.5px; font-weight: 700;
-      letter-spacing: 1px; text-transform: uppercase;
-      padding: 5px 14px; border-radius: 50px;
-      margin-bottom: 14px;
-    }
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(26px,4vw,42px);
-      font-weight: 800; letter-spacing: -1.5px;
-      color: var(--ink);
-      margin-bottom: 16px;
-    }
-    .section-lead {
-      font-size: 16px; color: var(--muted);
-      max-width: 600px; margin-bottom: 56px;
-    }
+  .publisher-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 3px;
+    padding: 8px 16px;
+    margin-bottom: 40px;
+    backdrop-filter: blur(4px);
+    background: rgba(255,255,255,0.05);
+  }
 
-    /* ─── ABOUT ───────────────────────────── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-    }
-    @media(max-width:768px){ .about-grid { grid-template-columns:1fr; } }
-    .about-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .about-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(30,107,255,0.14); }
-    .about-card img {
-      width: 100%; height: 220px;
-      object-fit: cover;
-      display: block;
-    }
-    .about-card-body { padding: 28px; }
-    .about-card-body p { font-size: 15px; color: #444; text-align: left; }
+  .publisher-badge .bentham-logo {
+    width: 32px; height: 32px;
+    background: var(--crimson);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 11px; color: white; letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
 
-    /* ─── AIM ─────────────────────────────── */
-    .aim-section { background: var(--ink2); position: relative; overflow: hidden; border-radius: 24px; padding: 64px 7%; }
-    .aim-section::before {
-      content:''; position:absolute; inset:0; pointer-events:none;
-      background: radial-gradient(ellipse 70% 70% at 110% 50%, rgba(30,107,255,0.25) 0%, transparent 65%);
-    }
-    .aim-section .section-title { color: #fff; }
-    .aim-section .section-tag { background: rgba(255,255,255,0.1); color: var(--neon); }
-    .aim-text { font-size: 16px; color: rgba(255,255,255,0.72); max-width: 720px; line-height: 1.85; }
+  .publisher-badge span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 2px; text-transform: uppercase;
+  }
 
-    /* ─── TOPICS ──────────────────────────── */
-    .topics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 18px;
-    }
-    .topic-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px 24px;
-      display: flex; align-items: flex-start; gap: 16px;
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .topic-card::before {
-      content:''; position:absolute; left:0; top:0; bottom:0;
-      width: 4px; background: var(--sky);
-      border-radius:4px 0 0 4px;
-      transition: width 0.2s;
-    }
-    .topic-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(30,107,255,0.12); border-color: rgba(30,107,255,0.3); }
-    .topic-card:hover::before { width: 6px; }
-    .topic-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 13px; font-weight: 800;
-      color: var(--sky);
-      min-width: 32px;
-    }
-    .topic-text { font-size: 14.5px; color: var(--ink); font-weight: 500; line-height: 1.5; }
-    .topic-booked {
-      text-decoration: line-through; color: var(--muted);
-    }
-    .booked-badge {
-      font-size: 11px; font-weight: 700;
-      background: #dcfce7; color: #16a34a;
-      padding: 2px 8px; border-radius: 50px;
-      margin-top: 4px; display: inline-block;
-    }
+  .publisher-badge .sep { color: rgba(255,255,255,0.2); }
 
-    /* ─── EDITORS ─────────────────────────── */
-    .editors-grid {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 28px;
-    }
-    @media(max-width:1000px){ .editors-grid { grid-template-columns: repeat(2,1fr); } }
-    @media(max-width:600px){ .editors-grid { grid-template-columns: 1fr; } }
-    .editor-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 24px;
-      text-align: center;
-      transition: transform 0.25s, box-shadow 0.25s;
-      position: relative;
-      overflow: hidden;
-    }
-    .editor-card::after {
-      content: '';
-      position: absolute; top:0; left:0; right:0; height:4px;
-      background: linear-gradient(90deg, var(--sky), var(--neon));
-    }
-    .editor-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(30,107,255,0.12); }
-    .editor-avatar {
-      width: 96px; height: 96px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--sky);
-      margin-bottom: 16px;
-      box-shadow: 0 0 0 6px rgba(30,107,255,0.08);
-    }
-    .editor-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 17px; font-weight: 700;
-      color: var(--ink); margin-bottom: 4px;
-    }
-    .editor-role { font-size: 13px; color: var(--sky); font-weight: 600; margin-bottom: 2px; }
-    .editor-affil { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-bottom: 16px; }
-    .editor-links { display: flex; justify-content: center; gap: 12px; }
-    .editor-links a {
-      width: 34px; height: 34px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 50%; border: 1px solid var(--border);
-      color: var(--muted); font-size: 14px;
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
-    }
-    .editor-links a:hover { background: var(--sky); color: #fff; border-color: var(--sky); }
+  .scopus-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--scopus);
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 1.5px;
+    padding: 4px 12px; border-radius: 2px;
+    text-transform: uppercase;
+  }
 
-    /* ─── GUIDELINES ──────────────────────── */
-    .guidelines-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
-    }
-    @media(max-width:768px){ .guidelines-grid { grid-template-columns:1fr; } }
-    .guide-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px;
-      box-shadow: var(--shadow);
-    }
-    .guide-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 18px; font-weight: 700;
-      color: var(--ink); margin-bottom: 20px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .guide-card h3 i { color: var(--sky); }
-    .guide-list { list-style: none; }
-    .guide-list li {
-      display: flex; align-items: flex-start; gap: 12px;
-      font-size: 14.5px; color: #444;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(30,107,255,0.06);
-    }
-    .guide-list li:last-child { border-bottom: none; }
-    .guide-list li::before {
-      content: ''; flex-shrink: 0;
-      width: 6px; height: 6px;
-      background: var(--sky); border-radius: 50%;
-      margin-top: 8px;
-    }
-    .benefits-card {
-      background: linear-gradient(135deg, var(--ink), var(--ink2));
-      border-radius: var(--radius);
-      padding: 36px;
-      color: #fff;
-      position: relative; overflow: hidden;
-      grid-column: 1 / -1;
-    }
-    .benefits-card::before {
-      content:''; position:absolute; top:-50%; right:-10%;
-      width:350px; height:350px;
-      background: radial-gradient(circle, rgba(30,107,255,0.3) 0%, transparent 70%);
-    }
-    .benefits-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 22px; font-weight: 700;
-      margin-bottom: 16px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .benefits-card h3 i { color: var(--neon); }
-    .benefits-card p { font-size: 15px; opacity: 0.82; line-height: 1.8; max-width:680px; }
-    .benefit-pills {
-      display: flex; flex-wrap: wrap; gap: 10px;
-      margin-top: 20px;
-    }
-    .benefit-pill {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 50px;
-      padding: 6px 16px; font-size: 13px;
-      display: flex; align-items: center; gap: 7px;
-    }
-    .benefit-pill i { color: var(--neon); font-size: 11px; }
+  .hero-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 13px;
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--crimson);
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-label::before {
+    content: '';
+    width: 40px; height: 2px; background: var(--crimson); display: inline-block;
+  }
 
-    /* ─── TIMELINE ────────────────────────── */
-    .timeline-wrap {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 20px;
-    }
-    @media(max-width:900px){ .timeline-wrap { grid-template-columns: repeat(2,1fr); } }
-    @media(max-width:500px){ .timeline-wrap { grid-template-columns: 1fr; } }
-    .date-card {
-      background: var(--card-bg);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-      text-align: center;
-      position: relative; overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .date-card:hover { transform: translateY(-4px); }
-    .date-card .step-icon {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: var(--soft);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 16px;
-      font-size: 18px; color: var(--sky);
-    }
-    .date-card h3 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
-    .date-card .date-val { font-size: 14px; color: var(--muted); }
-    .date-card.state-completed {
-      opacity: 0.65;
-      background: #f3f4f6;
-      border-color: #d1d5db;
-    }
-    .date-card.state-completed .step-icon { background: #e5e7eb; color: #9ca3af; }
-    .date-card.state-active {
-      border-color: var(--sky);
-      background: #eff6ff;
-      box-shadow: 0 8px 30px rgba(30,107,255,0.18);
-    }
-    .date-card.state-active .step-icon { background: var(--sky); color: #fff; }
-    .date-card.state-active::after {
-      content: 'NOW';
-      position: absolute; top: 12px; right: 14px;
-      font-size: 10px; font-weight: 800; letter-spacing: 0.5px;
-      background: var(--sky); color: #fff;
-      padding: 2px 8px; border-radius: 50px;
-    }
-    .date-card.state-upcoming {
-      border-color: rgba(34,197,94,0.4);
-      background: #f0fdf4;
-    }
-    .date-card.state-upcoming .step-icon { background: #dcfce7; color: #16a34a; }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+    line-height: 1.08;
+    color: white;
+    margin-bottom: 14px;
+    max-width: 780px;
+  }
 
-    /* ─── PLATFORMS ───────────────────────── */
-    .platforms-row {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      align-items: center; gap: 40px;
-    }
-    .platform-item {
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      opacity: 0.7; transition: opacity 0.2s, transform 0.2s;
-    }
-    .platform-item:hover { opacity: 1; transform: translateY(-3px); }
-    .platform-item img { height: 44px; object-fit: contain; }
-    .platform-item span { font-size: 12px; font-weight: 600; color: var(--muted); }
+  .hero-title em {
+    font-style: normal;
+    color: var(--gold-light);
+    position: relative;
+  }
 
-    /* ─── SUBMIT ──────────────────────────── */
-    .submit-section {
-      background: linear-gradient(135deg, var(--sky), var(--accent));
-      border-radius: 24px;
-      padding: 72px 8%;
-      text-align: center;
-      color: #fff;
-      position: relative; overflow: hidden;
-    }
-    .submit-section::before {
-      content:''; position:absolute; inset:0;
-      background: radial-gradient(ellipse 60% 80% at 50% -20%, rgba(255,255,255,0.15) 0%, transparent 60%);
-    }
-    .submit-section h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(26px,4vw,40px);
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-    .submit-section p { font-size: 16px; opacity: 0.85; margin-bottom: 36px; }
-    .submit-email {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 50px; padding: 12px 24px;
-      color: #fff; font-size: 15px; font-weight: 600;
-      margin-bottom: 32px;
-      backdrop-filter: blur(10px);
-    }
-    .submit-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;  z-index: 2; 
-     overflow: visible;  position: relative;  z-index: 999;
-    }
-    .btn-white {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: #fff; color: var(--sky);
-      padding: 14px 28px; border-radius: 50px;
-      font-weight: 700; font-size: 15px;
-      text-decoration: none;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .btn-white:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(0,0,0,0.2); }
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent;
-      border: 2px solid rgba(255,255,255,0.6);
-      color: #fff;
-      padding: 13px 26px; border-radius: 50px;
-      font-weight: 600; font-size: 15px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .btn-ghost:hover { background: rgba(255,255,255,0.15); transform: translateY(-3px); }
+  .hero-subtitle {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.5px;
+    margin-bottom: 48px;
+    max-width: 540px;
+  }
 
-    /* ─── DOWNLOAD ────────────────────────── */
-    .download-wrap {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 40px;
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-    .download-wrap h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 20px; font-weight: 700;
-      color: var(--ink); margin-bottom: 8px;
-    }
-    .download-wrap p { font-size: 14.5px; color: var(--muted); margin-bottom: 24px; }
+  .hero-badges {
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  }
 
-    /* ─── FOOTER ──────────────────────────── */
-    footer {
-      background: var(--ink);
-      color: rgba(255,255,255,0.55);
-      text-align: center;
-      padding: 32px 8%;
-    }
-    footer p { font-size: 13.5px; }
-    footer .visitor-counter { margin-top: 12px; }
+  .badge-no-fee {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(232,160,32,0.15);
+    border: 1px solid rgba(232,160,32,0.4);
+    border-radius: 3px;
+    padding: 8px 16px;
+    color: var(--gold-light);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 13px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
 
-    /* ─── SCROLL REVEAL ───────────────────── */
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-  </style>
+  .hero-divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--crimson), rgba(255,255,255,0.1), transparent);
+    margin-top: 60px;
+  }
+
+  /* ── DATES STRIP ──────────────────────────────────────────── */
+  .dates-strip {
+    background: var(--crimson-dark);
+    padding: 0;
+  }
+
+  .dates-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    divide-x: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .date-item {
+    padding: 28px 40px;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    position: relative;
+  }
+  .date-item:last-child { border-right: none; }
+
+  .date-item-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 500; font-size: 11px;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 6px;
+  }
+
+  .date-item-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.4rem;
+    color: var(--gold-light);
+    letter-spacing: 0.5px;
+  }
+
+  .date-item-icon {
+    position: absolute; right: 30px; top: 50%; transform: translateY(-50%);
+    opacity: 0.2; font-size: 2rem;
+  }
+
+  /* ── LAYOUT ───────────────────────────────────────────────── */
+  .main-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 320px;
+    gap: 0;
+    padding: 0 40px;
+  }
+
+  .main-content { padding: 64px 48px 64px 0; border-right: 1px solid var(--ash-dark); }
+  .sidebar { padding: 64px 0 64px 40px; }
+
+  /* ── SECTION HEADERS ──────────────────────────────────────── */
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .section-header .tag {
+    background: var(--crimson);
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 2px;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700; font-size: 1.65rem;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  /* ── ABOUT BOX ────────────────────────────────────────────── */
+  .about-box {
+    background: var(--ink-soft);
+    border-radius: 6px;
+    padding: 36px 40px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-box::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--crimson), var(--gold));
+  }
+
+  .about-box p {
+    font-size: 0.97rem; line-height: 1.75;
+    color: rgba(255,255,255,0.72);
+    font-weight: 300;
+  }
+
+  .about-box p + p { margin-top: 14px; }
+
+  /* ── TOC ──────────────────────────────────────────────────── */
+  .toc-section { margin-bottom: 52px; }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .toc-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 18px;
+    background: white;
+    border: 1px solid var(--ash-dark);
+    border-radius: 5px;
+    transition: all 0.22s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .toc-item::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--crimson);
+    transition: width 0.3s ease;
+  }
+
+  .toc-item:hover {
+    border-color: var(--crimson);
+    box-shadow: 0 4px 20px rgba(192,23,15,0.1);
+    transform: translateY(-2px);
+  }
+  .toc-item:hover::after { width: 100%; }
+
+  .toc-num {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: var(--crimson);
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 12px;
+    color: white;
+    margin-top: 1px;
+  }
+
+  .toc-text {
+    font-size: 0.855rem;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
+  /* ── EDITORS ─────────────────────────────────────────────── */
+  .editors-section { margin-bottom: 48px; }
+
+  .editors-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .editor-card {
+    background: white;
+    border: 1px solid var(--ash-dark);
+    border-radius: 6px;
+    padding: 20px;
+    display: flex; align-items: center; gap: 14px;
+    transition: box-shadow 0.2s;
+  }
+  .editor-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.09); }
+
+  .editor-avatar {
+    width: 64px; height: 64px; flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--crimson-dark), var(--crimson));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.05rem;
+    color: white;
+    letter-spacing: 0.5px;
+  }
+
+  .editor-info { flex: 1; min-width: 0; }
+
+  .editor-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 0.95rem;
+    color: var(--ink);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .editor-role {
+    font-size: 0.78rem; color: var(--text-dim);
+    margin-top: 2px; line-height: 1.4;
+  }
+
+  .editor-star {
+    flex-shrink: 0;
+    width: 8px; height: 8px;
+    background: var(--crimson);
+    border-radius: 50%;
+  }
+
+  /* ── SIDEBAR ─────────────────────────────────────────────── */
+  .sidebar-card {
+    background: white;
+    border: 1px solid var(--ash-dark);
+    border-radius: 6px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .sidebar-card-header {
+    background: var(--ink);
+    padding: 14px 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .sidebar-card-body { padding: 20px; }
+
+  /* CTA buttons */
+  .cta-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    padding: 13px 20px;
+    border-radius: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 13px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    transition: all 0.2s;
+    margin-bottom: 10px;
+  }
+
+  .cta-primary {
+    background: var(--crimson);
+    color: white;
+    border: 2px solid var(--crimson);
+  }
+  .cta-primary:hover {
+    background: var(--crimson-dark);
+    border-color: var(--crimson-dark);
+    box-shadow: 0 4px 16px rgba(192,23,15,0.35);
+    transform: translateY(-1px);
+  }
+
+  .cta-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--ash-dark);
+  }
+  .cta-outline:hover {
+    border-color: var(--crimson);
+    color: var(--crimson);
+    background: rgba(192,23,15,0.04);
+  }
+
+  /* guidelines list */
+  .guideline-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--ash-dark);
+  }
+  .guideline-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .guideline-icon {
+    width: 24px; height: 24px; flex-shrink: 0;
+    background: rgba(192,23,15,0.1);
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--crimson); font-size: 12px; font-weight: 700;
+  }
+
+  .guideline-text { font-size: 0.875rem; color: var(--ink); line-height: 1.4; }
+  .guideline-val {
+    font-weight: 700; color: var(--crimson);
+    display: block; font-size: 1rem;
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+
+  /* contact */
+  .contact-item {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 10px;
+    font-size: 0.875rem; color: var(--ink);
+  }
+  .contact-item:last-child { margin-bottom: 0; }
+  .contact-icon { color: var(--crimson); font-size: 1rem; }
+  .contact-link { color: var(--ink); text-decoration: none; word-break: break-all; }
+  .contact-link:hover { color: var(--crimson); }
+
+  /* date items in sidebar */
+  .sidebar-date {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--ash-dark);
+  }
+  .sidebar-date:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .sidebar-date-bullet {
+    width: 10px; height: 10px; flex-shrink: 0;
+    background: var(--crimson);
+    border-radius: 50%;
+    margin-top: 5px;
+  }
+
+  .sidebar-date-label {
+    font-size: 0.78rem; color: var(--text-dim); font-weight: 400;
+    margin-bottom: 2px;
+  }
+
+  .sidebar-date-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem;
+    color: var(--ink);
+  }
+
+  /* ── FOOTER ──────────────────────────────────────────────── */
+  .footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    padding: 32px 40px;
+    font-size: 0.82rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+
+  .footer a { color: var(--gold-light); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  /* ── ANIMATIONS ──────────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-label   { animation: fadeUp 0.6s ease both 0.1s; }
+  .hero-title   { animation: fadeUp 0.7s ease both 0.25s; }
+  .hero-subtitle{ animation: fadeUp 0.7s ease both 0.4s; }
+  .hero-badges  { animation: fadeUp 0.7s ease both 0.55s; }
+  .publisher-badge { animation: fadeUp 0.6s ease both 0s; }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .main-grid { grid-template-columns: 1fr; padding: 0 20px; }
+    .main-content { padding: 40px 0; border-right: none; border-bottom: 1px solid var(--ash-dark); }
+    .sidebar { padding: 40px 0; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .editors-grid { grid-template-columns: 1fr; }
+    .dates-inner { grid-template-columns: 1fr; }
+    .date-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .hero-inner { padding: 48px 20px 40px; }
+  }
+
+  @media (max-width: 600px) {
+    .editors-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 2.1rem; }
+  }
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="navbar">
-  <div class="nav-logo">Tiny<span>ML</span> Book</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#topics">Topics</a></li>
-    <li><a href="#editors">Editors</a></li>
-    <li><a href="#guidelines">Guidelines</a></li>
-    <li><a href="#dates">Dates</a></li>
-  </ul>
-  <a class="nav-cta" href="#submit">Submit Now</a>
-  <div class="hamburger" id="hamburger">
-    <span></span><span></span><span></span>
+<!-- ──────────────── HERO ──────────────── -->
+<header class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-lines">
+    <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#C0170F" stop-opacity="0.8"/>
+          <stop offset="100%" stop-color="#E8A020" stop-opacity="0.2"/>
+        </linearGradient>
+      </defs>
+      <g stroke="url(#lg1)" stroke-width="0.7" fill="none">
+        <line x1="200" y1="0" x2="1200" y2="400"/>
+        <line x1="300" y1="0" x2="1200" y2="500"/>
+        <line x1="0" y1="100" x2="900" y2="500"/>
+        <line x1="0" y1="200" x2="800" y2="500"/>
+        <line x1="500" y1="0" x2="1200" y2="300"/>
+        <line x1="700" y1="0" x2="1200" y2="200"/>
+        <line x1="0" y1="0" x2="600" y2="500"/>
+        <polyline points="100,0 400,200 700,100 1000,300 1200,150"/>
+        <polyline points="0,350 250,200 600,350 900,150 1200,280"/>
+        <circle cx="780" cy="180" r="60"/>
+        <circle cx="780" cy="180" r="100"/>
+        <circle cx="780" cy="180" r="140"/>
+        <circle cx="1050" cy="80" r="40"/>
+        <circle cx="1050" cy="80" r="70"/>
+      </g>
+    </svg>
   </div>
-</nav>
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#about" onclick="closeMobile()">About</a>
-  <a href="#topics" onclick="closeMobile()">Topics</a>
-  <a href="#editors" onclick="closeMobile()">Editors</a>
-  <a href="#guidelines" onclick="closeMobile()">Guidelines</a>
-  <a href="#dates" onclick="closeMobile()">Important Dates</a>
-  <a href="#submit" onclick="closeMobile()">Submit Now</a>
-</div>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-badge"><div class="dot"></div>Call for Book Chapters — 2026</div>
-  <h1>TinyML-Enabled <span class="highlight">IoT Systems</span><br>Recent Advancements</h1>
-  <p class="hero-sub">Submit your chapter to an internationally distributed edited book on Tiny Machine Learning and next-generation IoT edge intelligence.</p>
-  <div class="hero-actions">
-    <a class="btn-primary" href="#submit"><i class="fas fa-paper-plane"></i> Submit Abstract</a>
-    <a class="btn-outline" href="./Book_Chapter_Format.docx" download><i class="fas fa-download"></i> Download Template</a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num">10<span>+</span></div><div class="stat-label">Key Topics</div></div>
-    <div class="stat-div"></div>
-    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Expert Editors</div></div>
-    <div class="stat-div"></div>
-    <div class="stat"><div class="stat-num">3<span>+</span></div><div class="stat-label">Distribution Channels</div></div>
-    <div class="stat-div"></div>
-    <div class="stat"><div class="stat-num">DOI</div><div class="stat-label">via Zenodo</div></div>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<div id="about">
-<div class="section">
-  <div class="reveal">
-    <div class="section-tag">About the Book</div>
-    <h2 class="section-title">Advancing Edge Intelligence</h2>
-    <p class="section-lead">A curated collection of research and real-world applications at the intersection of machine learning and IoT.</p>
-  </div>
-  <div class="about-grid">
-    <div class="about-card reveal reveal-delay-1">
-      <img src="https://www.allaboutcircuits.com/uploads/thumbnails/what_is_tinyml_technical_article_thumbnail.jpg" alt="TinyML overview" />
-      <div class="about-card-body">
-        <p>Tiny Machine Learning (TinyML) enables intelligent ML models to run directly on ultra-low-power microcontrollers and edge IoT devices — bringing AI closer to the physical world without cloud dependency.</p>
-      </div>
+  <div class="hero-inner">
+    <div class="publisher-badge">
+      <img src="https://www.benthamscience.com/blog/wp-content/uploads/2023/08/logobsp.png" alt="Bentham Science" style="height:44px;border-radius:4px;"/>
+      <span class="sep">|</span>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Scopus_logo.svg/3840px-Scopus_logo.svg.png"Scopus Indexed" style="height:32px;background:white;border-radius:4px;padding:2px 6px;"/>
     </div>
-    <div class="about-card reveal reveal-delay-2">
-      <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc" alt="IoT devices" />
-      <div class="about-card-body">
-        <p>This edited book presents cutting-edge contributions across healthcare, smart agriculture, wearable devices, industrial IoT, and beyond — bringing together researchers and practitioners from around the world.</p>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
 
-<!-- AIM -->
-<div class="section" style="padding-top:0;">
-  <div class="aim-section reveal">
-    <div class="section-tag">Aim & Scope</div>
-    <h2 class="section-title" style="margin-bottom:20px;">Why This Book Matters</h2>
-    <p class="aim-text">
-      This volume provides a platform for researchers, academicians, and industry professionals to share innovative architectures, deployment strategies, and real-world implementations of TinyML-enabled IoT systems. With a focus on resource-constrained embedded devices, the book bridges the gap between machine learning theory and practical edge deployment — covering everything from model compression to secure inference at the network edge.
+    <div class="hero-label">Call for Book Chapters</div>
+
+    <h1 class="hero-title">
+      TinyML-Enabled IoT Systems:<br/>
+      <em>Recent Advances</em>
+    </h1>
+
+    <p class="hero-subtitle">
+      An edited scholarly volume bringing together cutting-edge research on embedded intelligence, edge AI, and resource-constrained machine learning for next-generation IoT architectures.
     </p>
-  </div>
-</div>
 
-<!-- TOPICS -->
-<div id="topics">
-<div class="section">
-  <div class="reveal">
-    <div class="section-tag">Topics Covered</div>
-    <h2 class="section-title">Key Research Areas</h2>
-    <p class="section-lead">10 focused chapters covering the full TinyML ecosystem. Booked topics are already assigned.</p>
-  </div>
-  <div class="topics-grid">
-
-    <div class="topic-card reveal reveal-delay-1">
-      <div class="topic-num">01</div>
-      <div>
-        <div class="topic-text topic-booked">Introduction to TinyML: Concepts, Motivation, and Use Cases</div>
-        <span class="booked-badge"><i class="fas fa-check"></i> Assigned</span>
+    <div class="hero-badges">
+      <div class="badge-no-fee">
+        <span>✦</span> No Publication Charges
+      </div>
+      <div class="badge-no-fee" style="border-color: rgba(245,200,85,0.4); color: var(--gold-light);">
+        <span>✦</span> Pages: 15 – 20 per Chapter
       </div>
     </div>
 
-    <div class="topic-card reveal reveal-delay-1">
-      <div class="topic-num">02</div>
+    <div class="hero-divider"></div>
+  </div>
+</header>
+
+<!-- ──────────────── DATES STRIP ──────────────── -->
+<div class="dates-strip">
+  <div class="dates-inner">
+    <div class="date-item">
+      <div class="date-item-label">Abstract Submission Deadline</div>
+      <div class="date-item-value">July 10, 2026</div>
+      <span class="date-item-icon">📝</span>
+    </div>
+    <div class="date-item">
+      <div class="date-item-label">Notification of Acceptance</div>
+      <div class="date-item-value">July 25, 2026</div>
+      <span class="date-item-icon">📬</span>
+    </div>
+    <div class="date-item">
+      <div class="date-item-label">Full Paper Submission</div>
+      <div class="date-item-value">August 10, 2026</div>
+      <span class="date-item-icon">📖</span>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────── MAIN ──────────────── -->
+<div class="main-grid">
+
+  <!-- LEFT CONTENT -->
+  <main class="main-content">
+
+    <!-- About -->
+    <section class="reveal" style="margin-bottom:48px;">
+      <div class="section-header">
+        <span class="tag">About</span>
+        <h2>About the Book</h2>
+      </div>
+      <div class="about-box">
+        <p>
+          <em style="color:var(--gold-light); font-style:normal;">TinyML-Enabled IoT Systems: Recent Advances</em> is a peer-reviewed edited volume published by <strong style="color:white;">Bentham Science Publishers</strong> and indexed in <strong style="color:var(--scopus);">Scopus</strong>. It targets researchers, engineers, and practitioners working at the intersection of machine learning and constrained embedded systems.
+        </p>
+        <p>
+          The book solicits original, unpublished chapters spanning foundational theory, system architectures, algorithmic innovation, deployment pipelines, and real-world application domains — from industrial IoT and precision agriculture to smart healthcare and security-critical embedded AI.
+        </p>
+        <p>
+          There are <strong style="color:var(--gold-light);">no publication charges</strong>. Chapters are subject to rigorous peer review, and the corresponding author must hold an <strong style="color:white;">H-Index greater than 10</strong>. Submitted manuscripts must maintain plagiarism below 10% and AI-similarity at 0%.
+        </p>
+      </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="toc-section reveal">
+      <div class="section-header">
+        <span class="tag">Topics</span>
+        <h2>Table of Contents</h2>
+      </div>
+      <div class="toc-grid">
+
+        <div class="toc-item">
+          <div class="toc-num">01</div>
+          <div class="toc-text">Introduction to TinyML and Edge-Native Intelligence for IoT Systems</div>
+        </div>
+
+        <div class="toc-item">
+          <div class="toc-num">02</div>
+          <div class="toc-text">Embedded Computing Architectures and Hardware Platforms for TinyML</div>
+        </div>
+
+        <div class="toc-item">
+          <div class="toc-num">03</div>
+          <div class="toc-text">Hardware–Software Co-Design Strategies for Resource-Constrained TinyML Systems</div>
+        </div>
+
+        <div class="toc-item">
+          <div class="toc-num">04</div>
+          <div class="toc-text">Machine Learning Algorithms and Neural Network Architectures for TinyML</div>
+        </div>
+
+        <div class="toc-item">
+          <div class="toc-num">05</div>
+          <div class="toc-text">TinyML Frameworks, Toolchains, and Software Ecosystems</div>
+        </div>
+
+        <div class="toc-item">
+          <div class="toc-num">06</div>
+          <div class="toc-text">TinyMLOps: Deployment Pipelines and Lifecycle Management for Embedded AI</div>
+        </div>
+
+        <div class="toc-item">
+          <div class="toc-num">07</div>
+          <div class="toc-text">Model Compression, Quantization, and Resource-Aware Optimization Techniques for TinyML</div>
+        </div>
+
+        <div class="toc-item">
+          <div class="toc-num">08</div>
+          <div class="toc-text">Energy-Efficient Learning and Inference for Ultra-Low-Power TinyML Systems</div>
+        </div>
+
+        <div class="toc-item">
+          <div class="toc-num">09</div>
+          <div class="toc-text">On-Device Adaptation, Continual Learning, and Federated Learning in TinyML</div>
+        </div>
+
+        <div class="toc-item">
+          <div class="toc-num">10</div>
+          <div class="toc-text">Security, Privacy, and Trustworthy Intelligence in TinyML-Enabled IoT Systems</div>
+        </div>
+
+        <div class="toc-item">
+          <div class="toc-num">11</div>
+          <div class="toc-text">Benchmarking, Performance Evaluation, and Deployment Metrics for TinyML Systems</div>
+        </div>
+
+        <div class="toc-item">
+          <div class="toc-num">12</div>
+          <div class="toc-text">TinyML Applications in Smart Healthcare, Wearable Computing, and Digital Health</div>
+        </div>
+
+        <div class="toc-item">
+          <div class="toc-num">13</div>
+          <div class="toc-text">TinyML Applications in Industrial IoT, Predictive Maintenance, and Intelligent Automation</div>
+        </div>
+
+        <div class="toc-item">
+          <div class="toc-num">14</div>
+          <div class="toc-text">TinyML Applications in Agriculture, Environmental Monitoring, and Smart Infrastructure</div>
+        </div>
+
+        <div class="toc-item" style="grid-column: 1 / -1;">
+          <div class="toc-num">15</div>
+          <div class="toc-text">Emerging Trends, Open Challenges, and Future Directions of TinyML-Enabled IoT Systems</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Editors -->
+    <section class="editors-section reveal" style="margin-top:52px;">
+      <div class="section-header">
+        <span class="tag">Editors</span>
+        <h2>Editorial Board</h2>
+      </div>
+      <div class="editors-grid">
+
+        <div class="editor-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwnbGSr7R77Y6N6HHTRVhNj4meAblTrisBIw&s" alt="Chandramouli Haldar" class="editor-avatar" style="object-fit:cover;border-radius:50%;width:56px;height:56px;flex-shrink:0;border:2px solid var(--ash-dark);"/>
+          <div class="editor-info">
+            <div class="editor-name">Chandramouli Haldar</div>
+            <div class="editor-role">Independent Researcher<br/>NovaTech Innovative Solutions, India</div>
+          </div>
+        </div>
+
+        <div class="editor-card">
+          <img src="https://media.licdn.com/dms/image/v2/D4D03AQEq6-9gR2QpmA/profile-displayphoto-shrink_200_200/B4DZT7_yyvHkAc-/0/1739394592379?e=2147483647&v=beta&t=0OJI2vGZWTRSaOt8TI6A4IqcV-G_pP7BcttRYcToNf0" alt="Dr. Lalit Garg" class="editor-avatar" style="object-fit:cover;border-radius:50%;width:56px;height:56px;flex-shrink:0;border:2px solid var(--ash-dark);"/>
+          <div class="editor-info">
+            <div class="editor-name">Dr. Lalit Garg</div>
+            <div class="editor-role">Professor<br/>University of Malta, Malta</div>
+          </div>
+        </div>
+
+        <div class="editor-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiEwEzg1Yj0mvEiNQlfYFbEy_F6VNhdwCa_A&s" alt="Dr. Suparna Biswas" class="editor-avatar" style="object-fit:cover;border-radius:50%;width:56px;height:56px;flex-shrink:0;border:2px solid var(--ash-dark);"/>
+          <div class="editor-info">
+            <div class="editor-name">Dr. Suparna Biswas</div>
+            <div class="editor-role">Associate Professor<br/>Guru Nanak Institute of Technology, India</div>
+          </div>
+        </div>
+
+        <div class="editor-card">
+          <img src="https://abhijeet-sarkar-01.github.io/soumikpodder/assets/images/photo%20(1).jpg" alt="Dr. Soumik Podder" class="editor-avatar" style="object-fit:cover;border-radius:50%;width:56px;height:56px;flex-shrink:0;border:2px solid var(--ash-dark);"/>
+          <div class="editor-info">
+            <div class="editor-name">Dr. Soumik Podder</div>
+            <div class="editor-role">Associate Professor<br/>University of Engineering & Management, India</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Submit -->
+    <div class="sidebar-card reveal">
+      <div class="sidebar-card-header">🚀 Submit Your Chapter</div>
+      <div class="sidebar-card-body">
+                <a href="https://forms.gle/AYdHETxwhza8ztQK7" target="_blank" class="cta-btn cta-primary" style="background: var(--gold); border-color: var(--gold); color: var(--ink);">
+          Google Form ↗
+        </a>
+        <a href="./Sample file.docx" target="_blank" class="cta-btn cta-outline">
+          Chapter Format / Template ↗
+        </a>
+        <a href="./AUTHOR-CHECKLIST.pdf" target="_blank" class="cta-btn cta-outline">
+          Author Guidelines ↗
+        </a>
+        <p style="font-size:0.75rem; color: var(--text-dim); margin-top: 8px; line-height: 1.5;">
+          Submit abstracts via the Submission Portal or Google Form. Full chapters are due after acceptance notification.
+        </p>
+      </div>
+    </div>
+
+    <!-- Dates -->
+    <div class="sidebar-card reveal">
+      <div class="sidebar-card-header">📅 Important Dates</div>
+      <div class="sidebar-card-body">
+        <div class="sidebar-date">
+          <div class="sidebar-date-bullet"></div>
+          <div>
+            <div class="sidebar-date-label">Abstract Submission Deadline</div>
+            <div class="sidebar-date-val">July 10, 2026</div>
+          </div>
+        </div>
+        <div class="sidebar-date">
+          <div class="sidebar-date-bullet" style="background: var(--gold);"></div>
+          <div>
+            <div class="sidebar-date-label">Notification of Acceptance</div>
+            <div class="sidebar-date-val">July 25, 2026</div>
+          </div>
+        </div>
+        <div class="sidebar-date">
+          <div class="sidebar-date-bullet" style="background: #2E7D32;"></div>
+          <div>
+            <div class="sidebar-date-label">Full Paper Submission</div>
+            <div class="sidebar-date-val">August 10, 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guidelines -->
+    <div class="sidebar-card reveal">
+      <div class="sidebar-card-header">📋 Submission Guidelines</div>
+      <div class="sidebar-card-body">
+        <div class="guideline-item">
+          <div class="guideline-icon">%</div>
+          <div class="guideline-text">
+            Plagiarism Limit
+            <span class="guideline-val">Under 10%</span>
+          </div>
+        </div>
+        <div class="guideline-item">
+          <div class="guideline-icon">🤖</div>
+          <div class="guideline-text">
+            AI-Generated Similarity
+            <span class="guideline-val">0%</span>
+          </div>
+        </div>
+        <div class="guideline-item">
+          <div class="guideline-icon">H</div>
+          <div class="guideline-text">
+            Corresponding Author H-Index
+            <span class="guideline-val">&gt; 10</span>
+          </div>
+        </div>
+        <div class="guideline-item">
+          <div class="guideline-icon">📄</div>
+          <div class="guideline-text">
+            Page Length
+            <span class="guideline-val">15 – 20 Pages</span>
+          </div>
+        </div>
+        <div class="guideline-item">
+          <div class="guideline-icon">💰</div>
+          <div class="guideline-text">
+            Publication Charge
+            <span class="guideline-val" style="color: #2E7D32;">No Charge</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Publisher -->
+    <div class="sidebar-card reveal">
+      <div class="sidebar-card-header">🏛 Publisher & Indexing</div>
+      <div class="sidebar-card-body">
+        <div style="margin-bottom:14px;text-align:center;">
+          <img src="https://www.benthamscience.com/blog/wp-content/uploads/2023/08/logobsp.png" alt="Bentham Science Publishers" style="max-width:160px;border-radius:6px;"/>
+          <div style="font-size:0.72rem;color:var(--text-dim);margin-top:4px;">benthamscience.com</div>
+        </div>
+        <div style="background:rgba(244,121,32,0.06);border:1px solid rgba(244,121,32,0.25);border-radius:4px;padding:12px;display:flex;align-items:center;justify-content:center;gap:10px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Scopus_logo.svg/3840px-Scopus_logo.svg.png"Scopus Indexed" style="max-width:130px;background:white;border-radius:4px;padding:4px 8px;"/>
+          <div style="font-size:0.78rem;color:var(--text-dim);line-height:1.4;">
+            Scopus indexed upon publication
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="sidebar-card reveal">
+      <div class="sidebar-card-header">✉ Contact Editors</div>
+      <div class="sidebar-card-body">
+        <div class="contact-item">
+          <span class="contact-icon">✉</span>
+          <a href="mailto:editors.ratml2026@gmail.com" class="contact-link">editors.ratml2026@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">📞</span>
+          <a href="tel:+918336001208" class="contact-link">+91 8336001208</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">🌐</span>
+          <a href="https://book-chapter-tinyml.vercel.app" target="_blank" class="contact-link">book-chapter-tinyml.vercel.app</a>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ──────────────── FOOTER ──────────────── -->
+<footer class="footer">
   <div>
-      <div class="topic-text topic-booked">Edge Intelligence and TinyML for Resource-Constrained IoT Devices</div>
-         <span class="booked-badge"><i class="fas fa-check"></i> Assigned</span>
-         </div>
-    </div>
-
-    <div class="topic-card reveal reveal-delay-2">
-      <div class="topic-num">03</div>
-      <div class="topic-text">TinyML for Smart Healthcare: Remote Monitoring and Assistive Systems</div>
-    </div>
-
-    <div class="topic-card reveal reveal-delay-2">
-      <div class="topic-num">04</div>
-      <div class="topic-text">TinyML in Wearables and Body-Area Networks</div>
-    </div>
-
-    <div class="topic-card reveal reveal-delay-3">
-      <div class="topic-num">05</div>
-      <div class="topic-text">TinyML for Industrial IoT, Smart Agriculture and Home Automation</div>
-    </div>
-
-    <div class="topic-card reveal reveal-delay-3">
-      <div class="topic-num">06</div>
-      <div class="topic-text">Neural Network Architectures for Ultra-Low-Power Devices</div>
-    </div>
-
-    <div class="topic-card reveal reveal-delay-4">
-      <div class="topic-num">07</div>
-      <div class="topic-text">Model Optimization: Quantization, Pruning, and Compression</div>
-    </div>
-
-    <div class="topic-card reveal reveal-delay-4">
-      <div class="topic-num">08</div>
-      <div class="topic-text">Energy-Efficient Learning and Inference Techniques</div>
-    </div>
-
-    <div class="topic-card reveal reveal-delay-1">
-      <div class="topic-num">09</div>
-      <div class="topic-text">Deployment Challenges and Design Strategies for TinyML</div>
-    </div>
-
-    <div class="topic-card reveal reveal-delay-2">
-      <div class="topic-num">10</div>
-      <div>
-        <div class="topic-text topic-booked">Security, Privacy, and Trust in TinyML-Enabled IoT Systems</div>
-        <span class="booked-badge"><i class="fas fa-check"></i> Assigned</span>
-      </div>
-    </div>
-
+    &copy; 2026 <strong style="color:rgba(255,255,255,0.7);">TinyML-Enabled IoT Systems: Recent Advances</strong> — Bentham Science Publishers
   </div>
-</div>
-</div>
-
-<!-- EDITORS -->
-<div id="editors" style="background:linear-gradient(180deg, var(--bg) 0%, #e8efff 100%); padding: 0;">
-<div class="section">
-  <div class="reveal">
-    <div class="section-tag">Editorial Board</div>
-    <h2 class="section-title">Meet the Editors</h2>
-    <p class="section-lead">Leading researchers and practitioners guiding this volume.</p>
-  </div>
-  <div class="editors-grid">
-
-    <div class="editor-card reveal reveal-delay-1">
-      <img class="editor-avatar" src="https://chandramouli01.vercel.app/img/dp.png" alt="Chandramouli Haldar" />
-      <div class="editor-name">Chandramouli Haldar</div>
-      <div class="editor-role">Independent Researcher</div>
-      <div class="editor-affil">NovaTech Innovative Solutions, India</div>
-      <div class="editor-links">
-        <a href="mailto:editors.ratml2026@gmail.com"><i class="fas fa-envelope"></i></a>
-        <a href="https://www.linkedin.com/in/chandramouli01/" target="_blank"><i class="fab fa-linkedin"></i></a>
-      </div>
-    </div>
-
-    <div class="editor-card reveal reveal-delay-2">
-      <img class="editor-avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_ZN0whhshnlBdXMDrAd1TLOXld4IXWInLE2njg0RzWw&s" alt="Dr. Suparna Biswas" />
-      <div class="editor-name">Dr. Suparna Biswas</div>
-      <div class="editor-role">Associate Professor</div>
-      <div class="editor-affil">Guru Nanak Institute of Technology, India</div>
-      <div class="editor-links">
-        <a href="mailto:editors.ratml2026@gmail.com"><i class="fas fa-envelope"></i></a>
-        <a href="https://www.linkedin.com/in/suparna-biswas-9362721a6/" target="_blank"><i class="fab fa-linkedin"></i></a>
-      </div>
-    </div>
-
-    <div class="editor-card reveal reveal-delay-3">
-      <img class="editor-avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKhiEGmpNe1Yo_x--qjwTjHi4_fBsG0Hyquw&s" alt="Dr. Srabani Biswas" />
-      <div class="editor-name">Dr. Srabani Biswas</div>
-      <div class="editor-role">Associate Professor</div>
-      <div class="editor-affil">Guru Nanak Institute of Technology, India</div>
-      <div class="editor-links">
-        <a href="mailto:editors.ratml2026@gmail.com"><i class="fas fa-envelope"></i></a>
-        <a href="https://www.linkedin.com/in/dr-srabani-biswas-567392a4" target="_blank"><i class="fab fa-linkedin"></i></a>
-      </div>
-    </div>
-
-    <div class="editor-card reveal reveal-delay-4">
-      <img class="editor-avatar" src="https://media.licdn.com/dms/image/v2/D5603AQHENO8HTgYFVQ/profile-displayphoto-scale_200_200/B56ZrD7Do3JkAc-/0/1764223630450?e=2147483647&v=beta&t=L7eHlWhxzrA8KtTg832eFCwqs9s6OKwOz86BPMCejqo" alt="Dr. Rishi Jain" />
-      <div class="editor-name">Dr. Rishi Jain</div>
-      <div class="editor-role">Program Director</div>
-      <div class="editor-affil">Asian Institute of Technology, Thailand</div>
-      <div class="editor-links">
-        <a href="mailto:editors.ratml2026@gmail.com"><i class="fas fa-envelope"></i></a>
-        <a href="https://www.linkedin.com/in/dr-rishi-jain-b27b3519a" target="_blank"><i class="fab fa-linkedin"></i></a>
-      </div>
-    </div>
-
-  </div>
-</div>
-</div>
-
-<!-- GUIDELINES -->
-<div id="guidelines">
-<div class="section">
-  <div class="reveal">
-    <div class="section-tag">Guidelines</div>
-    <h2 class="section-title">Submission Guidelines</h2>
-    <p class="section-lead">Everything you need to know before submitting your chapter.</p>
-  </div>
-  <div class="guidelines-grid">
-    <div class="guide-card reveal reveal-delay-1">
-      <h3><i class="fas fa-file-alt"></i> Author Guidelines</h3>
-      <ul class="guide-list">
-        <li>Chapter must be original and unpublished work</li>
-        <li>Similarity index must be below 15%</li>
-        <li>AI-generated content must be 0%</li>
-        <li>Minimum chapter length: more than 10 pages</li>
-        <li>Maximum number of authors: 6</li>
-        <li>Figures and tables must be clear and high resolution</li>
-        <li>Submit in Microsoft Word (.doc / .docx)</li>
-      </ul>
-    </div>
-    <div class="guide-card reveal reveal-delay-2">
-      <h3><i class="fas fa-tasks"></i> Submission Procedure</h3>
-      <ul class="guide-list">
-        <li>Download chapter template from this website</li>
-        <li>Submit abstract (max 250 words) via email or Google Form</li>
-        <li>Receive abstract acceptance notification</li>
-        <li>Submit full chapter after acceptance</li>
-        <li>Chapter undergoes editorial review process</li>
-        <li>Submit camera-ready chapter with plagiarism and AI reports</li>
-        <li>And Pay the APC of INR 500</li>
-      </ul>
-    </div>
-    <div class="benefits-card reveal">
-      <h3><i class="fas fa-star"></i> Author Benefits</h3>
-      <p>All chapters undergo peer review. The book will have an ISBN and each chapter will receive a DOI through Zenodo, indexed in OpenAIRE. Distributed globally through major platforms with one complimentary hard copy provided to authors.</p>
-      <div class="benefit-pills">
-        <div class="benefit-pill"><i class="fas fa-check"></i> Peer Reviewed</div>
-        <div class="benefit-pill"><i class="fas fa-check"></i> ISBN Assigned</div>
-        <div class="benefit-pill"><i class="fas fa-check"></i> DOI via Zenodo</div>
-        <div class="benefit-pill"><i class="fas fa-check"></i> OpenAIRE Indexed</div>
-        <div class="benefit-pill"><i class="fas fa-check"></i> Amazon Distribution</div>
-        <div class="benefit-pill"><i class="fas fa-check"></i> Kindle & Google Play</div>
-        <div class="benefit-pill"><i class="fas fa-check"></i> Hard Copy Included</div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- TEMPLATE DOWNLOAD -->
-<div class="section" style="padding-top:0;">
-  <div class="download-wrap reveal">
-    <i class="fas fa-file-word" style="font-size:40px;color:var(--sky);margin-bottom:12px;display:block;"></i>
-    <h3>Download Chapter Template</h3>
-    <p>Use the official template to format your chapter correctly before submission.</p>
-    <a class="btn-primary" href="./Book_Chapter_Format.docx" download>
-      <i class="fas fa-download"></i> Download .docx Template
-    </a>
-  </div>
-</div>
-
-<!-- PUBLICATION PLATFORMS -->
-<div class="section" style="padding-top:0;">
-  <div class="reveal" style="text-align:center;margin-bottom:40px;">
-    <div class="section-tag" style="margin:0 auto 14px;">Publication Platforms</div>
-    <h2 class="section-title">Where Your Chapter Will Appear</h2>
-  </div>
-  <div class="platforms-row reveal">
-    <div class="platform-item">
-      <img src="./files/amazon.png" alt="Amazon" />
-      <span>Amazon</span>
-    </div>
-    <div class="platform-item">
-      <img src="./files/kindle.png" alt="Kindle" />
-      <span>Kindle</span>
-    </div>
-    <div class="platform-item">
-      <img src="./files/playbooks.png" alt="Google Play Books" />
-      <span>Google Play Books</span>
-    </div>
-    <div class="platform-item">
-      <img src="./files/zenodo.png" alt="Zenodo" />
-      <span>Zenodo</span>
-    </div>
-    <div class="platform-item">
-      <img src="./files/openair.png" alt="OpenAIRE" />
-      <span>OpenAIRE</span>
-    </div>
-  </div>
-</div>
-
-<!-- IMPORTANT DATES -->
-<div id="dates">
-<div class="section">
-  <div class="reveal">
-    <div class="section-tag">Timeline</div>
-    <h2 class="section-title">Important Dates</h2>
-    <p class="section-lead">Stay on track with key submission and review milestones.</p>
-  </div>
-  <div class="timeline-wrap">
-    <div class="date-card reveal reveal-delay-1" data-date="2026-04-7">
-      <div class="step-icon"><i class="fas fa-file-signature"></i></div>
-      <h3>Abstract Submission</h3>
-      <div class="date-val">07 April 2026</div>
-    </div>
-    <div class="date-card reveal reveal-delay-2" data-date="2026-04-15">
-      <div class="step-icon"><i class="fas fa-book-open"></i></div>
-      <h3>Full Chapter Submission</h3>
-      <div class="date-val">15 April 2026</div>
-    </div>
-    <div class="date-card reveal reveal-delay-3" data-date="2026-04-20">
-      <div class="step-icon"><i class="fas fa-bell"></i></div>
-      <h3>Review Notification</h3>
-      <div class="date-val">20 April 2026</div>
-    </div>
-    <div class="date-card reveal reveal-delay-4" data-date="2026-04-30">
-      <div class="step-icon"><i class="fas fa-flag-checkered"></i></div>
-      <h3>Camera Ready Submission</h3>
-      <div class="date-val">30 April 2026</div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- SUBMIT -->
-<div id="submit" class="section">
-  <div class="submit-section reveal">
-    <h2>Ready to Contribute?</h2>
-    <p>Submit your abstract today and be part of a globally distributed research book on TinyML.</p>
-    <div class="submit-email"><i class="fas fa-envelope"></i> editors.ratml2026@gmail.com</div>
-    <div class="submit-btns">
-      <a class="btn-white" href="mailto:editors.ratml2026@gmail.com">
-        <i class="fas fa-envelope"></i> Submit via Email
-      </a>
-      <a class="btn-ghost" href="https://docs.google.com/forms/d/e/1FAIpQLSd6f6SIVh0BNiN_1DorTy8-u7EdgedVZkNq6R7DzpwoyaKnEQ/viewform?usp=header" target="_blank">
-        <i class="fab fa-google"></i> Submit via Google Form
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 TinyML-Enabled IoT Systems — All rights reserved.</p>
-  <div class="visitor-counter">
-    <img src="https://visitor-badge.laobi.icu/badge?page_id=tinyml-book" alt="visitor counter" />
+  <div style="display:flex;gap:20px;flex-wrap:wrap;">
+     <a href="https://forms.gle/AYdHETxwhza8ztQK7" target="_blank">Google Form</a>
+    <a href="mailto:editors.ratml2026@gmail.com">Contact Editors</a>
   </div>
 </footer>
 
 <script>
-  // SCROLL REVEAL
+  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => io.observe(el));
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
-  // DATE STATES
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  const dateCards = document.querySelectorAll('.date-card[data-date]');
-  let firstUpcoming = true;
-  dateCards.forEach(card => {
-    const d = new Date(card.dataset.date);
-    d.setHours(0,0,0,0);
-    if(d < today) {
-      card.classList.add('state-completed');
-    } else if(d.getTime() === today.getTime() || (firstUpcoming && d >= today)) {
-      card.classList.add('state-active');
-      firstUpcoming = false;
-    } else {
-      card.classList.add('state-upcoming');
-    }
-  });
-
-  // MOBILE MENU
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-  function closeMobile() { mobileMenu.classList.remove('open'); }
-
-  // NAV shadow on scroll
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').style.boxShadow =
-      window.scrollY > 20 ? '0 4px 24px rgba(30,107,255,0.10)' : 'none';
+  reveals.forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.08 + 's';
+    io.observe(el);
   });
 </script>
 </body>
