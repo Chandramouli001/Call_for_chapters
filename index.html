@@ -4,946 +4,455 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Call for Book Chapters — TinyML-Enabled IoT Systems: Recent Advances</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@500;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --crimson: #C0170F;
-    --crimson-dark: #8B0F09;
-    --crimson-glow: rgba(192,23,15,0.18);
-    --gold: #E8A020;
-    --gold-light: #F5C855;
-    --ink: #0D0D0D;
-    --ink-soft: #1A1A1A;
-    --ash: #F5F2EE;
-    --ash-dark: #E8E3DC;
-    --text-muted: #5A5250;
-    --text-dim: #7A7270;
+    --navy: #0F1B3D;
+    --navy-deep: #0A1230;
+    --blue: #2C4BFF;
+    --blue-soft: #E8ECFF;
+    --amber: #F5A623;
+    --amber-deep: #D8871A;
+    --paper: #FAF8F4;
+    --ink: #16182A;
+    --ink-soft: #565A72;
+    --line: #E4E1D8;
     --white: #FFFFFF;
-    --scopus: #F47920;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
-
   body {
-    font-family: 'Barlow', sans-serif;
-    background: var(--ash);
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
     color: var(--ink);
-    overflow-x: hidden;
-    line-height: 1.6;
+    line-height: 1.65;
+    font-size: 17px;
   }
 
-  /* ── HERO ─────────────────────────────────────────────────── */
+  a { color: var(--blue); }
+
+  .wrap { max-width: 800px; margin: 0 auto; padding: 0 28px; }
+
+  /* ── HERO ─────────────────────────────────────────────── */
   .hero {
-    background: var(--ink);
+    background: var(--navy);
     position: relative;
     overflow: hidden;
-    padding: 0;
   }
 
-  .hero-noise {
+  .hero-glow {
     position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    background:
+      radial-gradient(ellipse 60% 50% at 85% 0%, rgba(44,75,255,0.35) 0%, transparent 60%),
+      radial-gradient(ellipse 45% 40% at 10% 100%, rgba(245,166,35,0.18) 0%, transparent 65%);
     pointer-events: none;
-    z-index: 0;
   }
 
-  /* animated circuit lines */
-  .hero-lines {
-    position: absolute; inset: 0; z-index: 0; overflow: hidden;
-  }
-  .hero-lines svg {
-    width: 100%; height: 100%; opacity: 0.12;
-  }
-
-  .hero-gradient {
-    position: absolute; inset: 0; z-index: 0;
-    background: radial-gradient(ellipse 80% 60% at 70% 30%, rgba(192,23,15,0.35) 0%, transparent 65%),
-                radial-gradient(ellipse 40% 50% at 20% 80%, rgba(232,160,32,0.12) 0%, transparent 60%),
-                linear-gradient(180deg, #0D0D0D 0%, #140808 60%, #1A0A04 100%);
+  .hero-circuit {
+    position: absolute; inset: 0; opacity: 0.14; pointer-events: none;
   }
 
   .hero-inner {
-    position: relative; z-index: 2;
-    max-width: 1100px; margin: 0 auto;
-    padding: 80px 40px 64px;
+    position: relative; z-index: 1;
+    max-width: 800px; margin: 0 auto;
+    padding: 72px 28px 48px;
   }
 
-  .publisher-badge {
-    display: inline-flex; align-items: center; gap: 10px;
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 3px;
-    padding: 8px 16px;
-    margin-bottom: 40px;
-    backdrop-filter: blur(4px);
-    background: rgba(255,255,255,0.05);
-  }
-
-  .publisher-badge .bentham-logo {
-    width: 32px; height: 32px;
-    background: var(--crimson);
-    border-radius: 4px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900; font-size: 11px; color: white; letter-spacing: 0.5px;
-    flex-shrink: 0;
-  }
-
-  .publisher-badge span {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700; font-size: 13px;
-    color: rgba(255,255,255,0.7);
-    letter-spacing: 2px; text-transform: uppercase;
-  }
-
-  .publisher-badge .sep { color: rgba(255,255,255,0.2); }
-
-  .scopus-pill {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: var(--scopus);
-    color: white;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700; font-size: 12px;
-    letter-spacing: 1.5px;
-    padding: 4px 12px; border-radius: 2px;
-    text-transform: uppercase;
-  }
-
-  .hero-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700; font-size: 13px;
-    letter-spacing: 4px; text-transform: uppercase;
-    color: var(--crimson);
-    margin-bottom: 18px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .hero-label::before {
-    content: '';
-    width: 40px; height: 2px; background: var(--crimson); display: inline-block;
-  }
-
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: clamp(2.4rem, 5.5vw, 4.5rem);
-    line-height: 1.08;
-    color: white;
-    margin-bottom: 14px;
-    max-width: 780px;
-  }
-
-  .hero-title em {
-    font-style: normal;
-    color: var(--gold-light);
-    position: relative;
-  }
-
-  .hero-subtitle {
-    font-family: 'Barlow', sans-serif;
-    font-weight: 300;
-    font-size: 1.1rem;
-    color: rgba(255,255,255,0.55);
-    letter-spacing: 0.5px;
-    margin-bottom: 48px;
-    max-width: 540px;
-  }
-
-  .hero-badges {
-    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
-  }
-
-  .badge-no-fee {
-    display: flex; align-items: center; gap: 8px;
-    background: rgba(232,160,32,0.15);
-    border: 1px solid rgba(232,160,32,0.4);
-    border-radius: 3px;
-    padding: 8px 16px;
-    color: var(--gold-light);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700; font-size: 13px;
-    letter-spacing: 1.5px; text-transform: uppercase;
-  }
-
-  .hero-divider {
-    width: 100%; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--crimson), rgba(255,255,255,0.1), transparent);
-    margin-top: 60px;
-  }
-
-  /* ── DATES STRIP ──────────────────────────────────────────── */
-  .dates-strip {
-    background: var(--crimson-dark);
-    padding: 0;
-  }
-
-  .dates-inner {
-    max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    divide-x: 1px solid rgba(255,255,255,0.15);
-  }
-
-  .date-item {
-    padding: 28px 40px;
-    border-right: 1px solid rgba(255,255,255,0.12);
-    position: relative;
-  }
-  .date-item:last-child { border-right: none; }
-
-  .date-item-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 500; font-size: 11px;
-    letter-spacing: 2.5px; text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 6px;
-  }
-
-  .date-item-value {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900; font-size: 1.4rem;
-    color: var(--gold-light);
-    letter-spacing: 0.5px;
-  }
-
-  .date-item-icon {
-    position: absolute; right: 30px; top: 50%; transform: translateY(-50%);
-    opacity: 0.2; font-size: 2rem;
-  }
-
-  /* ── LAYOUT ───────────────────────────────────────────────── */
-  .main-grid {
-    max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 320px;
-    gap: 0;
-    padding: 0 40px;
-  }
-
-  .main-content { padding: 64px 48px 64px 0; border-right: 1px solid var(--ash-dark); }
-  .sidebar { padding: 64px 0 64px 40px; }
-
-  /* ── SECTION HEADERS ──────────────────────────────────────── */
-  .section-header {
-    display: flex; align-items: center; gap: 14px;
+  .publine {
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
     margin-bottom: 32px;
   }
+  .publine img { height: 26px; background: white; border-radius: 5px; padding: 3px 7px; }
+  
 
-  .section-header .tag {
-    background: var(--crimson);
+  .eyebrow {
+    font-weight: 700; font-size: 13px;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: clamp(2.3rem, 6vw, 3.4rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
     color: white;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700; font-size: 10px;
-    letter-spacing: 2.5px; text-transform: uppercase;
-    padding: 5px 12px; border-radius: 2px;
+    margin-bottom: 18px;
+  }
+  h1 .accent { color: var(--amber); font-style: italic; font-weight: 500; }
+
+  .subtitle {
+    color: rgba(255,255,255,0.68);
+    font-size: 1.15rem;
+    max-width: 52ch;
+    margin-bottom: 40px;
   }
 
-  .section-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700; font-size: 1.65rem;
-    color: var(--ink);
-    line-height: 1.2;
-  }
-
-  /* ── ABOUT BOX ────────────────────────────────────────────── */
-  .about-box {
-    background: var(--ink-soft);
-    border-radius: 6px;
-    padding: 36px 40px;
-    margin-bottom: 48px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .about-box::before {
-    content: '';
-    position: absolute; top: 0; left: 0;
-    width: 4px; height: 100%;
-    background: linear-gradient(180deg, var(--crimson), var(--gold));
-  }
-
-  .about-box p {
-    font-size: 0.97rem; line-height: 1.75;
-    color: rgba(255,255,255,0.72);
-    font-weight: 300;
-  }
-
-  .about-box p + p { margin-top: 14px; }
-
-  /* ── TOC ──────────────────────────────────────────────────── */
-  .toc-section { margin-bottom: 52px; }
-
-  .toc-grid {
+  /* ── FACTS BAR ────────────────────────────────────────── */
+  .facts {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .toc-item {
-    display: flex; align-items: flex-start; gap: 14px;
-    padding: 16px 18px;
-    background: white;
-    border: 1px solid var(--ash-dark);
-    border-radius: 5px;
-    transition: all 0.22s ease;
-    cursor: default;
-    position: relative;
+    grid-template-columns: repeat(4, 1fr);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 12px;
     overflow: hidden;
   }
+  .fact { padding: 18px 20px; border-right: 1px solid rgba(255,255,255,0.14); }
+  .fact:last-child { border-right: none; }
+  .fact-label { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 600; margin-bottom: 5px; }
+  .fact-val { font-weight: 800; font-size: 1.15rem; color: white; font-family: 'Fraunces', serif; }
 
-  .toc-item::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0;
-    width: 0; height: 2px;
-    background: var(--crimson);
-    transition: width 0.3s ease;
+  /* ── DOWNLOADS ───────────────────────────────────────── */
+  .downloads {
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    padding: 28px;
+    margin: -56px 0 48px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 8px 8px 0 var(--amber);
   }
-
-  .toc-item:hover {
-    border-color: var(--crimson);
-    box-shadow: 0 4px 20px rgba(192,23,15,0.1);
-    transform: translateY(-2px);
+  .downloads-label {
+    font-weight: 800; font-size: 13px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 16px;
   }
-  .toc-item:hover::after { width: 100%; }
-
-  .toc-num {
-    flex-shrink: 0;
-    width: 28px; height: 28px;
-    background: var(--crimson);
-    border-radius: 3px;
+  .dl-list { display: flex; flex-direction: column; gap: 10px; }
+  .dl-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    text-decoration: none;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .dl-item:hover { border-color: var(--blue); transform: translateX(3px); }
+  .dl-left { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  .dl-icon {
+    width: 40px; height: 40px; flex-shrink: 0; border-radius: 9px;
+    background: var(--blue-soft);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+  }
+  .dl-name { color: var(--ink); font-weight: 700; font-size: 1rem; }
+  .dl-sub { color: var(--ink-soft); font-size: 13px; margin-top: 1px; }
+  .dl-arrow { color: var(--blue); font-size: 1.2rem; flex-shrink: 0; }
+
+  .dl-item.primary {
+    background: var(--navy);
+    border-color: var(--navy);
+  }
+  .dl-item.primary .dl-icon { background: var(--amber); }
+  .dl-item.primary .dl-name { color: white; }
+  .dl-item.primary .dl-sub { color: rgba(255,255,255,0.55); }
+  .dl-item.primary .dl-arrow { color: var(--amber); }
+  .dl-item.primary:hover { border-color: var(--amber); }
+
+  /* ── SECTIONS ────────────────────────────────────────── */
+  section { padding: 44px 0; border-bottom: 1.5px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  .tag {
+    display: inline-block;
+    background: var(--blue-soft);
+    color: var(--blue);
     font-weight: 700; font-size: 12px;
-    color: white;
-    margin-top: 1px;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 4px 11px; border-radius: 5px;
+    margin-bottom: 12px;
   }
 
-  .toc-text {
-    font-size: 0.855rem;
-    font-weight: 400;
-    line-height: 1.45;
-    color: var(--ink);
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 1.75rem;
+    margin-bottom: 10px;
+    color: var(--navy);
   }
 
-  /* ── EDITORS ─────────────────────────────────────────────── */
-  .editors-section { margin-bottom: 48px; }
+  .section-intro { color: var(--ink-soft); font-size: 1rem; margin-bottom: 26px; max-width: 58ch; }
+  section > p { color: var(--ink-soft); font-size: 1.02rem; max-width: 62ch; }
+  section > p + p { margin-top: 14px; }
 
-  .editors-grid {
+  /* ── TOPICS ──────────────────────────────────────────── */
+  .topics { display: flex; flex-direction: column; }
+  .topic {
+    display: flex; gap: 18px; align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.04rem;
+  }
+  .topic:last-child { border-bottom: none; }
+  .topic-num {
+    color: var(--white);
+    background: var(--navy);
+    font-weight: 800; font-size: 13px;
+    flex-shrink: 0;
+    width: 30px; height: 30px;
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+  }
+  .topic:nth-child(4n+1) .topic-num { background: var(--blue); }
+  .topic:nth-child(4n+2) .topic-num { background: var(--navy); }
+  .topic:nth-child(4n+3) .topic-num { background: var(--amber-deep); }
+  .topic:nth-child(4n+4) .topic-num { background: var(--navy); }
+
+  /* ── GUIDELINES ──────────────────────────────────────── */
+  .guidelines {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 14px;
   }
-
-  .editor-card {
-    background: white;
-    border: 1px solid var(--ash-dark);
-    border-radius: 6px;
+  .g-item {
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
     padding: 20px;
+  }
+  .g-label { font-size: 13px; color: var(--ink-soft); font-weight: 600; margin-bottom: 6px; }
+  .g-val { font-weight: 800; font-size: 1.3rem; font-family: 'Fraunces', serif; color: var(--navy); }
+  .g-val.good { color: var(--blue); }
+
+  /* ── DATES ───────────────────────────────────────────── */
+  .dates { display: flex; flex-direction: column; }
+  .date-row {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .date-row:last-child { border-bottom: none; }
+  .date-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .date-row:nth-child(1) .date-dot { background: var(--blue); }
+  .date-row:nth-child(2) .date-dot { background: var(--amber); }
+  .date-row:nth-child(3) .date-dot { background: var(--navy); }
+  .date-name { font-size: 1.02rem; flex: 1; }
+  .date-val { font-weight: 800; font-size: 1.05rem; font-family: 'Fraunces', serif; color: var(--navy); white-space: nowrap; }
+
+  /* ── EDITORS ─────────────────────────────────────────── */
+  .editors { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .editor {
     display: flex; align-items: center; gap: 14px;
-    transition: box-shadow 0.2s;
-  }
-  .editor-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.09); }
-
-  .editor-avatar {
-    width: 64px; height: 64px; flex-shrink: 0;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--crimson-dark), var(--crimson));
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900; font-size: 1.05rem;
-    color: white;
-    letter-spacing: 0.5px;
-  }
-
-  .editor-info { flex: 1; min-width: 0; }
-
-  .editor-name {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700; font-size: 0.95rem;
-    color: var(--ink);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-
-  .editor-role {
-    font-size: 0.78rem; color: var(--text-dim);
-    margin-top: 2px; line-height: 1.4;
-  }
-
-  .editor-star {
-    flex-shrink: 0;
-    width: 8px; height: 8px;
-    background: var(--crimson);
-    border-radius: 50%;
-  }
-
-  /* ── SIDEBAR ─────────────────────────────────────────────── */
-  .sidebar-card {
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
     background: white;
-    border: 1px solid var(--ash-dark);
-    border-radius: 6px;
-    margin-bottom: 20px;
-    overflow: hidden;
+  }
+  .editor img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--blue-soft); }
+  .editor-name { font-weight: 700; font-size: 1rem; }
+  .editor-role { font-size: 13px; color: var(--ink-soft); margin-top: 2px; line-height: 1.4; }
+
+  /* ── CONTACT ─────────────────────────────────────────── */
+  .contact-grid { display: flex; flex-direction: column; gap: 14px; }
+  .contact-row { display: flex; align-items: center; gap: 14px; font-size: 1.02rem; }
+  .contact-row .icon {
+    width: 34px; height: 34px; flex-shrink: 0; border-radius: 8px;
+    background: var(--blue-soft); color: var(--blue);
+    display: flex; align-items: center; justify-content: center; font-size: 15px;
+  }
+  .contact-row a { text-decoration: none; font-weight: 600; }
+  .contact-row a:hover { text-decoration: underline; }
+
+  footer {
+    padding: 36px 0 56px;
+    color: var(--ink-soft);
+    font-size: 13.5px;
   }
 
-  .sidebar-card-header {
-    background: var(--ink);
-    padding: 14px 20px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700; font-size: 11px;
-    letter-spacing: 2.5px; text-transform: uppercase;
-    color: rgba(255,255,255,0.8);
-  }
-
-  .sidebar-card-body { padding: 20px; }
-
-  /* CTA buttons */
-  .cta-btn {
-    display: block;
-    width: 100%;
-    text-align: center;
-    text-decoration: none;
-    padding: 13px 20px;
-    border-radius: 4px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700; font-size: 13px;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    transition: all 0.2s;
-    margin-bottom: 10px;
-  }
-
-  .cta-primary {
-    background: var(--crimson);
-    color: white;
-    border: 2px solid var(--crimson);
-  }
-  .cta-primary:hover {
-    background: var(--crimson-dark);
-    border-color: var(--crimson-dark);
-    box-shadow: 0 4px 16px rgba(192,23,15,0.35);
-    transform: translateY(-1px);
-  }
-
-  .cta-outline {
-    background: transparent;
-    color: var(--ink);
-    border: 2px solid var(--ash-dark);
-  }
-  .cta-outline:hover {
-    border-color: var(--crimson);
-    color: var(--crimson);
-    background: rgba(192,23,15,0.04);
-  }
-
-  /* guidelines list */
-  .guideline-item {
-    display: flex; align-items: flex-start; gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--ash-dark);
-  }
-  .guideline-item:last-child { border-bottom: none; padding-bottom: 0; }
-
-  .guideline-icon {
-    width: 24px; height: 24px; flex-shrink: 0;
-    background: rgba(192,23,15,0.1);
-    border-radius: 3px;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--crimson); font-size: 12px; font-weight: 700;
-  }
-
-  .guideline-text { font-size: 0.875rem; color: var(--ink); line-height: 1.4; }
-  .guideline-val {
-    font-weight: 700; color: var(--crimson);
-    display: block; font-size: 1rem;
-    font-family: 'Barlow Condensed', sans-serif;
-  }
-
-  /* contact */
-  .contact-item {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 10px;
-    font-size: 0.875rem; color: var(--ink);
-  }
-  .contact-item:last-child { margin-bottom: 0; }
-  .contact-icon { color: var(--crimson); font-size: 1rem; }
-  .contact-link { color: var(--ink); text-decoration: none; word-break: break-all; }
-  .contact-link:hover { color: var(--crimson); }
-
-  /* date items in sidebar */
-  .sidebar-date {
-    display: flex; gap: 14px; align-items: flex-start;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--ash-dark);
-  }
-  .sidebar-date:last-child { border-bottom: none; padding-bottom: 0; }
-
-  .sidebar-date-bullet {
-    width: 10px; height: 10px; flex-shrink: 0;
-    background: var(--crimson);
-    border-radius: 50%;
-    margin-top: 5px;
-  }
-
-  .sidebar-date-label {
-    font-size: 0.78rem; color: var(--text-dim); font-weight: 400;
-    margin-bottom: 2px;
-  }
-
-  .sidebar-date-val {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700; font-size: 1rem;
-    color: var(--ink);
-  }
-
-  /* ── FOOTER ──────────────────────────────────────────────── */
-  .footer {
-    background: var(--ink);
-    color: rgba(255,255,255,0.5);
-    padding: 32px 40px;
-    font-size: 0.82rem;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 12px;
-  }
-
-  .footer a { color: var(--gold-light); text-decoration: none; }
-  .footer a:hover { text-decoration: underline; }
-
-  /* ── ANIMATIONS ──────────────────────────────────────────── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-label   { animation: fadeUp 0.6s ease both 0.1s; }
-  .hero-title   { animation: fadeUp 0.7s ease both 0.25s; }
-  .hero-subtitle{ animation: fadeUp 0.7s ease both 0.4s; }
-  .hero-badges  { animation: fadeUp 0.7s ease both 0.55s; }
-  .publisher-badge { animation: fadeUp 0.6s ease both 0s; }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.55s ease, transform 0.55s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── RESPONSIVE ──────────────────────────────────────────── */
-  @media (max-width: 900px) {
-    .main-grid { grid-template-columns: 1fr; padding: 0 20px; }
-    .main-content { padding: 40px 0; border-right: none; border-bottom: 1px solid var(--ash-dark); }
-    .sidebar { padding: 40px 0; }
-    .toc-grid { grid-template-columns: 1fr; }
-    .editors-grid { grid-template-columns: 1fr; }
-    .dates-inner { grid-template-columns: 1fr; }
-    .date-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.12); }
-    .hero-inner { padding: 48px 20px 40px; }
-  }
-
-  @media (max-width: 600px) {
-    .editors-grid { grid-template-columns: 1fr; }
-    .hero-title { font-size: 2.1rem; }
+  /* ── RESPONSIVE ──────────────────────────────────────── */
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .facts { grid-template-columns: repeat(2, 1fr); }
+    .fact:nth-child(2) { border-right: none; }
+    .fact:nth-child(3), .fact:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.14); }
+    .guidelines { grid-template-columns: 1fr; }
+    .editors { grid-template-columns: 1fr; }
+    .downloads { margin-top: -40px; box-shadow: 5px 5px 0 var(--amber); }
+    .hero-inner { padding: 56px 20px 40px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ──────────────── HERO ──────────────── -->
+<!-- ── HERO ── -->
 <header class="hero">
-  <div class="hero-noise"></div>
-  <div class="hero-gradient"></div>
-  <div class="hero-lines">
-    <svg viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#C0170F" stop-opacity="0.8"/>
-          <stop offset="100%" stop-color="#E8A020" stop-opacity="0.2"/>
-        </linearGradient>
-      </defs>
-      <g stroke="url(#lg1)" stroke-width="0.7" fill="none">
-        <line x1="200" y1="0" x2="1200" y2="400"/>
-        <line x1="300" y1="0" x2="1200" y2="500"/>
-        <line x1="0" y1="100" x2="900" y2="500"/>
-        <line x1="0" y1="200" x2="800" y2="500"/>
-        <line x1="500" y1="0" x2="1200" y2="300"/>
-        <line x1="700" y1="0" x2="1200" y2="200"/>
-        <line x1="0" y1="0" x2="600" y2="500"/>
-        <polyline points="100,0 400,200 700,100 1000,300 1200,150"/>
-        <polyline points="0,350 250,200 600,350 900,150 1200,280"/>
-        <circle cx="780" cy="180" r="60"/>
-        <circle cx="780" cy="180" r="100"/>
-        <circle cx="780" cy="180" r="140"/>
-        <circle cx="1050" cy="80" r="40"/>
-        <circle cx="1050" cy="80" r="70"/>
-      </g>
-    </svg>
-  </div>
-
+  <div class="hero-glow"></div>
+  <svg class="hero-circuit" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice">
+    <g stroke="#F5A623" stroke-width="1" fill="none">
+      <circle cx="650" cy="90" r="4" fill="#F5A623"/>
+      <circle cx="650" cy="90" r="45"/>
+      <line x1="650" y1="45" x2="650" y2="0"/>
+      <line x1="695" y1="90" x2="760" y2="90"/>
+      <circle cx="120" cy="320" r="3" fill="#2C4BFF"/>
+      <circle cx="120" cy="320" r="35"/>
+      <line x1="155" y1="320" x2="220" y2="320"/>
+      <line x1="220" y1="320" x2="220" y2="280"/>
+    </g>
+  </svg>
   <div class="hero-inner">
-    <div class="publisher-badge">
-      <img src="https://www.benthamscience.com/blog/wp-content/uploads/2023/08/logobsp.png" alt="Bentham Science" style="height:44px;border-radius:4px;"/>
-      <span class="sep">|</span>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Scopus_logo.svg/3840px-Scopus_logo.svg.png"Scopus Indexed" style="height:32px;background:white;border-radius:4px;padding:2px 6px;"/>
+    <div class="eyebrow">Call for Book Chapters</div>
+    <div class="publine">
+      <img src="https://www.benthamscience.com/blog/wp-content/uploads/2023/08/logobsp.png" alt="Bentham Science Publishers"/>
+     
     </div>
-
-    <div class="hero-label">Call for Book Chapters</div>
-
-    <h1 class="hero-title">
-      TinyML-Enabled IoT Systems:<br/>
-      <em>Recent Advances</em>
-    </h1>
-
-    <p class="hero-subtitle">
-      An edited scholarly volume bringing together cutting-edge research on embedded intelligence, edge AI, and resource-constrained machine learning for next-generation IoT architectures.
+    <h1>TinyML-Enabled IoT<br/>Systems: <span class="accent">Recent Advances</span></h1>
+    <p class="subtitle">
+      An edited scholarly volume on embedded intelligence, edge AI, and resource-constrained machine learning for next-generation IoT systems.
     </p>
-
-    <div class="hero-badges">
-      <div class="badge-no-fee">
-        <span>✦</span> No Publication Charges
-      </div>
-      <div class="badge-no-fee" style="border-color: rgba(245,200,85,0.4); color: var(--gold-light);">
-        <span>✦</span> Pages: 15 – 20 per Chapter
-      </div>
+    <div class="facts">
+      <div class="fact"><div class="fact-label">Abstract due</div><div class="fact-val">Aug 31</div></div>
+      <div class="fact"><div class="fact-label">Acceptance</div><div class="fact-val">Sep 10</div></div>
+      <div class="fact"><div class="fact-label">Chapter due</div><div class="fact-val">Sep 20</div></div>
+      <div class="fact"><div class="fact-label">Fee</div><div class="fact-val">None</div></div>
     </div>
-
-    <div class="hero-divider"></div>
   </div>
 </header>
 
-<!-- ──────────────── DATES STRIP ──────────────── -->
-<div class="dates-strip">
-  <div class="dates-inner">
-    <div class="date-item">
-      <div class="date-item-label">Abstract Submission Deadline</div>
-      <div class="date-item-value">July 31, 2026</div>
-      <span class="date-item-icon">📝</span>
-    </div>
-    <div class="date-item">
-      <div class="date-item-label">Notification of Acceptance</div>
-      <div class="date-item-value">Aug 10, 2026</div>
-      <span class="date-item-icon">📬</span>
-    </div>
-    <div class="date-item">
-      <div class="date-item-label">Full Paper Submission</div>
-      <div class="date-item-value">August 20, 2026</div>
-      <span class="date-item-icon">📖</span>
+<div class="wrap">
+
+  <!-- ── DOWNLOADS ── -->
+  <div class="downloads">
+    <div class="downloads-label">Submit &amp; Download</div>
+    <div class="dl-list">
+      <a href="https://forms.gle/AYdHETxwhza8ztQK7" target="_blank" class="dl-item primary">
+        <div class="dl-left">
+          <div class="dl-icon">📝</div>
+          <div>
+            <div class="dl-name">Submit your abstract</div>
+            <div class="dl-sub">Google Form — opens in new tab</div>
+          </div>
+        </div>
+        <span class="dl-arrow">↗</span>
+      </a>
+      <a href="./Sample File.docx" target="_blank" class="dl-item">
+        <div class="dl-left">
+          <div class="dl-icon">📄</div>
+          <div>
+            <div class="dl-name">Chapter template</div>
+            <div class="dl-sub">.docx — formatting to follow</div>
+          </div>
+        </div>
+        <span class="dl-arrow">↓</span>
+      </a>
+      <a href="./AUTHOR-CHECKLIST.pdf" target="_blank" class="dl-item">
+        <div class="dl-left">
+          <div class="dl-icon">✅</div>
+          <div>
+            <div class="dl-name">Author guidelines</div>
+            <div class="dl-sub">.pdf — checklist before you submit</div>
+          </div>
+        </div>
+        <span class="dl-arrow">↓</span>
+      </a>
     </div>
   </div>
+
+  <!-- ── ABOUT ── -->
+  <section>
+    <span class="tag">About</span>
+    <h2>About the book</h2>
+    <p>
+      This peer-reviewed edited volume targets researchers, engineers, and practitioners working at the intersection of machine learning and constrained embedded systems.
+    </p>
+    <p>
+      We're looking for original, unpublished chapters spanning theory, system architecture, algorithms, deployment, and real-world applications — from industrial IoT and precision agriculture to smart healthcare and security-critical embedded AI.
+    </p>
+  </section>
+
+  <!-- ── TOPICS ── -->
+  <section>
+    <span class="tag">Topics</span>
+    <h2>Chapter topics</h2>
+    <p class="section-intro">15 topic areas the book covers. Your chapter should fit under one of these.</p>
+    <div class="topics">
+      <div class="topic"><span class="topic-num">01</span><span>Introduction to TinyML and edge-native intelligence for IoT systems</span></div>
+      <div class="topic"><span class="topic-num">02</span><span>Embedded computing architectures and hardware platforms for TinyML</span></div>
+      <div class="topic"><span class="topic-num">03</span><span>Hardware–software co-design strategies for resource-constrained TinyML systems</span></div>
+      <div class="topic"><span class="topic-num">04</span><span>Machine learning algorithms and neural network architectures for TinyML</span></div>
+      <div class="topic"><span class="topic-num">05</span><span>TinyML frameworks, toolchains, and software ecosystems</span></div>
+      <div class="topic"><span class="topic-num">06</span><span>TinyMLOps: deployment pipelines and lifecycle management for embedded AI</span></div>
+      <div class="topic"><span class="topic-num">07</span><span>Model compression, quantization, and resource-aware optimization techniques</span></div>
+      <div class="topic"><span class="topic-num">08</span><span>Energy-efficient learning and inference for ultra-low-power TinyML systems</span></div>
+      <div class="topic"><span class="topic-num">09</span><span>On-device adaptation, continual learning, and federated learning in TinyML</span></div>
+      <div class="topic"><span class="topic-num">10</span><span>Security, privacy, and trustworthy intelligence in TinyML-enabled IoT systems</span></div>
+      <div class="topic"><span class="topic-num">11</span><span>Benchmarking, performance evaluation, and deployment metrics for TinyML systems</span></div>
+      <div class="topic"><span class="topic-num">12</span><span>TinyML applications in smart healthcare, wearable computing, and digital health</span></div>
+      <div class="topic"><span class="topic-num">13</span><span>TinyML applications in industrial IoT, predictive maintenance, and automation</span></div>
+      <div class="topic"><span class="topic-num">14</span><span>TinyML applications in agriculture, environmental monitoring, and smart infrastructure</span></div>
+      <div class="topic"><span class="topic-num">15</span><span>Emerging trends, open challenges, and future directions of TinyML-enabled IoT systems</span></div>
+    </div>
+  </section>
+
+  <!-- ── GUIDELINES ── -->
+  <section>
+    <span class="tag">Requirements</span>
+    <h2>Submission requirements</h2>
+    <div class="guidelines">
+      <div class="g-item"><div class="g-label">Page length</div><div class="g-val">15–20 pages</div></div>
+      <div class="g-item"><div class="g-label">Publication charge</div><div class="g-val good">None</div></div>
+      <div class="g-item"><div class="g-label">Plagiarism limit</div><div class="g-val">Under 10%</div></div>
+      <div class="g-item"><div class="g-label">AI similarity</div><div class="g-val">0%</div></div>
+      <div class="g-item" style="grid-column: 1 / -1;"><div class="g-label">Corresponding author</div><div class="g-val">H-Index greater than 10</div></div>
+    </div>
+  </section>
+
+  <!-- ── DATES ── -->
+  <section>
+    <span class="tag">Timeline</span>
+    <h2>Key dates</h2>
+    <div class="dates">
+      <div class="date-row"><span class="date-dot"></span><span class="date-name">Abstract submission deadline</span><span class="date-val">July 31, 2026</span></div>
+      <div class="date-row"><span class="date-dot"></span><span class="date-name">Notification of acceptance</span><span class="date-val">August 10, 2026</span></div>
+      <div class="date-row"><span class="date-dot"></span><span class="date-name">Full chapter submission</span><span class="date-val">August 20, 2026</span></div>
+    </div>
+  </section>
+
+  <!-- ── EDITORS ── -->
+  <section>
+    <span class="tag">Editors</span>
+    <h2>Editorial board</h2>
+    <div class="editors">
+      <div class="editor">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwnbGSr7R77Y6N6HHTRVhNj4meAblTrisBIw&s" alt="Chandramouli Haldar"/>
+        <div><div class="editor-name">Chandramouli Haldar</div><div class="editor-role">Independent Researcher, NovaTech Innovative Solutions, India</div></div>
+      </div>
+      <div class="editor">
+        <img src="https://media.licdn.com/dms/image/v2/D4D03AQEq6-9gR2QpmA/profile-displayphoto-shrink_200_200/B4DZT7_yyvHkAc-/0/1739394592379?e=2147483647&v=beta&t=0OJI2vGZWTRSaOt8TI6A4IqcV-G_pP7BcttRYcToNf0" alt="Dr. Lalit Garg"/>
+        <div><div class="editor-name">Dr. Lalit Garg</div><div class="editor-role">Professor, University of Malta, Malta</div></div>
+      </div>
+      <div class="editor">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiEwEzg1Yj0mvEiNQlfYFbEy_F6VNhdwCa_A&s" alt="Dr. Suparna Biswas"/>
+        <div><div class="editor-name">Dr. Suparna Biswas</div><div class="editor-role">Associate Professor, Guru Nanak Institute of Technology, India</div></div>
+      </div>
+      <div class="editor">
+        <img src="https://abhijeet-sarkar-01.github.io/soumikpodder/assets/images/photo%20(1).jpg" alt="Dr. Soumik Podder"/>
+        <div><div class="editor-name">Dr. Soumik Podder</div><div class="editor-role">Associate Professor, University of Engineering & Management, India</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section>
+    <span class="tag">Contact</span>
+    <h2>Get in touch</h2>
+    <div class="contact-grid">
+      <div class="contact-row"><span class="icon">✉</span><a href="mailto:editors.ratml2026@gmail.com">editors.ratml2026@gmail.com</a></div>
+      <div class="contact-row"><span class="icon">📞</span><a href="tel:+918336001208">+91 8336001208</a></div>
+      <div class="contact-row"><span class="icon">🌐</span><a href="https://book-chapter-tinyml.vercel.app" target="_blank">book-chapter-tinyml.vercel.app</a></div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 TinyML-Enabled IoT Systems: Recent Advances — Bentham Science Publishers
+  </footer>
+
 </div>
 
-<!-- ──────────────── MAIN ──────────────── -->
-<div class="main-grid">
-
-  <!-- LEFT CONTENT -->
-  <main class="main-content">
-
-    <!-- About -->
-    <section class="reveal" style="margin-bottom:48px;">
-      <div class="section-header">
-        <span class="tag">About</span>
-        <h2>About the Book</h2>
-      </div>
-      <div class="about-box">
-        <p>
-          <em style="color:var(--gold-light); font-style:normal;">TinyML-Enabled IoT Systems: Recent Advances</em> is a peer-reviewed edited volume published by <strong style="color:white;">Bentham Science Publishers</strong> and indexed in <strong style="color:var(--scopus);">Scopus</strong>. It targets researchers, engineers, and practitioners working at the intersection of machine learning and constrained embedded systems.
-        </p>
-        <p>
-          The book solicits original, unpublished chapters spanning foundational theory, system architectures, algorithmic innovation, deployment pipelines, and real-world application domains — from industrial IoT and precision agriculture to smart healthcare and security-critical embedded AI.
-        </p>
-        <p>
-          There are <strong style="color:var(--gold-light);">no publication charges</strong>. Chapters are subject to rigorous peer review, and the corresponding author must hold an <strong style="color:white;">H-Index greater than 10</strong>. Submitted manuscripts must maintain plagiarism below 10% and AI-similarity at 0%.
-        </p>
-      </div>
-    </section>
-
-    <!-- Table of Contents -->
-    <section class="toc-section reveal">
-      <div class="section-header">
-        <span class="tag">Topics</span>
-        <h2>Table of Contents</h2>
-      </div>
-      <div class="toc-grid">
-
-        <div class="toc-item">
-          <div class="toc-num">01</div>
-          <div class="toc-text">Introduction to TinyML and Edge-Native Intelligence for IoT Systems</div>
-        </div>
-
-        <div class="toc-item">
-          <div class="toc-num">02</div>
-          <div class="toc-text">Embedded Computing Architectures and Hardware Platforms for TinyML</div>
-        </div>
-
-        <div class="toc-item">
-          <div class="toc-num">03</div>
-          <div class="toc-text">Hardware–Software Co-Design Strategies for Resource-Constrained TinyML Systems</div>
-        </div>
-
-        <div class="toc-item">
-          <div class="toc-num">04</div>
-          <div class="toc-text">Machine Learning Algorithms and Neural Network Architectures for TinyML</div>
-        </div>
-
-        <div class="toc-item">
-          <div class="toc-num">05</div>
-          <div class="toc-text">TinyML Frameworks, Toolchains, and Software Ecosystems</div>
-        </div>
-
-        <div class="toc-item">
-          <div class="toc-num">06</div>
-          <div class="toc-text">TinyMLOps: Deployment Pipelines and Lifecycle Management for Embedded AI</div>
-        </div>
-
-        <div class="toc-item">
-          <div class="toc-num">07</div>
-          <div class="toc-text">Model Compression, Quantization, and Resource-Aware Optimization Techniques for TinyML</div>
-        </div>
-
-        <div class="toc-item">
-          <div class="toc-num">08</div>
-          <div class="toc-text">Energy-Efficient Learning and Inference for Ultra-Low-Power TinyML Systems</div>
-        </div>
-
-        <div class="toc-item">
-          <div class="toc-num">09</div>
-          <div class="toc-text">On-Device Adaptation, Continual Learning, and Federated Learning in TinyML</div>
-        </div>
-
-        <div class="toc-item">
-          <div class="toc-num">10</div>
-          <div class="toc-text">Security, Privacy, and Trustworthy Intelligence in TinyML-Enabled IoT Systems</div>
-        </div>
-
-        <div class="toc-item">
-          <div class="toc-num">11</div>
-          <div class="toc-text">Benchmarking, Performance Evaluation, and Deployment Metrics for TinyML Systems</div>
-        </div>
-
-        <div class="toc-item">
-          <div class="toc-num">12</div>
-          <div class="toc-text">TinyML Applications in Smart Healthcare, Wearable Computing, and Digital Health</div>
-        </div>
-
-        <div class="toc-item">
-          <div class="toc-num">13</div>
-          <div class="toc-text">TinyML Applications in Industrial IoT, Predictive Maintenance, and Intelligent Automation</div>
-        </div>
-
-        <div class="toc-item">
-          <div class="toc-num">14</div>
-          <div class="toc-text">TinyML Applications in Agriculture, Environmental Monitoring, and Smart Infrastructure</div>
-        </div>
-
-        <div class="toc-item" style="grid-column: 1 / -1;">
-          <div class="toc-num">15</div>
-          <div class="toc-text">Emerging Trends, Open Challenges, and Future Directions of TinyML-Enabled IoT Systems</div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Editors -->
-    <section class="editors-section reveal" style="margin-top:52px;">
-      <div class="section-header">
-        <span class="tag">Editors</span>
-        <h2>Editorial Board</h2>
-      </div>
-      <div class="editors-grid">
-
-        <div class="editor-card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwnbGSr7R77Y6N6HHTRVhNj4meAblTrisBIw&s" alt="Chandramouli Haldar" class="editor-avatar" style="object-fit:cover;border-radius:50%;width:56px;height:56px;flex-shrink:0;border:2px solid var(--ash-dark);"/>
-          <div class="editor-info">
-            <div class="editor-name">Chandramouli Haldar</div>
-            <div class="editor-role">Independent Researcher<br/>NovaTech Innovative Solutions, India</div>
-          </div>
-        </div>
-
-        <div class="editor-card">
-          <img src="https://media.licdn.com/dms/image/v2/D4D03AQEq6-9gR2QpmA/profile-displayphoto-shrink_200_200/B4DZT7_yyvHkAc-/0/1739394592379?e=2147483647&v=beta&t=0OJI2vGZWTRSaOt8TI6A4IqcV-G_pP7BcttRYcToNf0" alt="Dr. Lalit Garg" class="editor-avatar" style="object-fit:cover;border-radius:50%;width:56px;height:56px;flex-shrink:0;border:2px solid var(--ash-dark);"/>
-          <div class="editor-info">
-            <div class="editor-name">Dr. Lalit Garg</div>
-            <div class="editor-role">Professor<br/>University of Malta, Malta</div>
-          </div>
-        </div>
-
-        <div class="editor-card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiEwEzg1Yj0mvEiNQlfYFbEy_F6VNhdwCa_A&s" alt="Dr. Suparna Biswas" class="editor-avatar" style="object-fit:cover;border-radius:50%;width:56px;height:56px;flex-shrink:0;border:2px solid var(--ash-dark);"/>
-          <div class="editor-info">
-            <div class="editor-name">Dr. Suparna Biswas</div>
-            <div class="editor-role">Associate Professor<br/>Guru Nanak Institute of Technology, India</div>
-          </div>
-        </div>
-
-        <div class="editor-card">
-          <img src="https://abhijeet-sarkar-01.github.io/soumikpodder/assets/images/photo%20(1).jpg" alt="Dr. Soumik Podder" class="editor-avatar" style="object-fit:cover;border-radius:50%;width:56px;height:56px;flex-shrink:0;border:2px solid var(--ash-dark);"/>
-          <div class="editor-info">
-            <div class="editor-name">Dr. Soumik Podder</div>
-            <div class="editor-role">Associate Professor<br/>University of Engineering & Management, India</div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-
-    <!-- Submit -->
-    <div class="sidebar-card reveal">
-      <div class="sidebar-card-header">🚀 Submit Your Chapter</div>
-      <div class="sidebar-card-body">
-                <a href="https://forms.gle/AYdHETxwhza8ztQK7" target="_blank" class="cta-btn cta-primary" style="background: var(--gold); border-color: var(--gold); color: var(--ink);">
-          Google Form ↗
-        </a>
-        <a href="./Sample File.docx" target="_blank" class="cta-btn cta-outline">
-          Chapter Format / Template ↗
-        </a>
-        <a href="./AUTHOR-CHECKLIST.pdf" target="_blank" class="cta-btn cta-outline">
-          Author Guidelines ↗
-        </a>
-        <p style="font-size:0.75rem; color: var(--text-dim); margin-top: 8px; line-height: 1.5;">
-          Submit abstracts via the Submission Portal or Google Form. Full chapters are due after acceptance notification.
-        </p>
-      </div>
-    </div>
-
-    <!-- Dates -->
-    <div class="sidebar-card reveal">
-      <div class="sidebar-card-header">📅 Important Dates</div>
-      <div class="sidebar-card-body">
-        <div class="sidebar-date">
-          <div class="sidebar-date-bullet"></div>
-          <div>
-            <div class="sidebar-date-label">Abstract Submission Deadline</div>
-            <div class="sidebar-date-val">July 31, 2026</div>
-          </div>
-        </div>
-        <div class="sidebar-date">
-          <div class="sidebar-date-bullet" style="background: var(--gold);"></div>
-          <div>
-            <div class="sidebar-date-label">Notification of Acceptance</div>
-            <div class="sidebar-date-val">Aug 10, 2026</div>
-          </div>
-        </div>
-        <div class="sidebar-date">
-          <div class="sidebar-date-bullet" style="background: #2E7D32;"></div>
-          <div>
-            <div class="sidebar-date-label">Full Paper Submission</div>
-            <div class="sidebar-date-val">August 20, 2026</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Guidelines -->
-    <div class="sidebar-card reveal">
-      <div class="sidebar-card-header">📋 Submission Guidelines</div>
-      <div class="sidebar-card-body">
-        <div class="guideline-item">
-          <div class="guideline-icon">%</div>
-          <div class="guideline-text">
-            Plagiarism Limit
-            <span class="guideline-val">Under 10%</span>
-          </div>
-        </div>
-        <div class="guideline-item">
-          <div class="guideline-icon">🤖</div>
-          <div class="guideline-text">
-            AI-Generated Similarity
-            <span class="guideline-val">0%</span>
-          </div>
-        </div>
-        <div class="guideline-item">
-          <div class="guideline-icon">H</div>
-          <div class="guideline-text">
-            Corresponding Author H-Index
-            <span class="guideline-val">&gt; 10</span>
-          </div>
-        </div>
-        <div class="guideline-item">
-          <div class="guideline-icon">📄</div>
-          <div class="guideline-text">
-            Page Length
-            <span class="guideline-val">15 – 20 Pages</span>
-          </div>
-        </div>
-        <div class="guideline-item">
-          <div class="guideline-icon">💰</div>
-          <div class="guideline-text">
-            Publication Charge
-            <span class="guideline-val" style="color: #2E7D32;">No Charge</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Publisher -->
-    <div class="sidebar-card reveal">
-      <div class="sidebar-card-header">🏛 Publisher & Indexing</div>
-      <div class="sidebar-card-body">
-        <div style="margin-bottom:14px;text-align:center;">
-          <img src="https://www.benthamscience.com/blog/wp-content/uploads/2023/08/logobsp.png" alt="Bentham Science Publishers" style="max-width:160px;border-radius:6px;"/>
-          <div style="font-size:0.72rem;color:var(--text-dim);margin-top:4px;">benthamscience.com</div>
-        </div>
-        <div style="background:rgba(244,121,32,0.06);border:1px solid rgba(244,121,32,0.25);border-radius:4px;padding:12px;display:flex;align-items:center;justify-content:center;gap:10px;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Scopus_logo.svg/3840px-Scopus_logo.svg.png"Scopus Indexed" style="max-width:130px;background:white;border-radius:4px;padding:4px 8px;"/>
-          <div style="font-size:0.78rem;color:var(--text-dim);line-height:1.4;">
-            Scopus indexed upon publication
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Contact -->
-    <div class="sidebar-card reveal">
-      <div class="sidebar-card-header">✉ Contact Editors</div>
-      <div class="sidebar-card-body">
-        <div class="contact-item">
-          <span class="contact-icon">✉</span>
-          <a href="mailto:editors.ratml2026@gmail.com" class="contact-link">editors.ratml2026@gmail.com</a>
-        </div>
-        <div class="contact-item">
-          <span class="contact-icon">📞</span>
-          <a href="tel:+918336001208" class="contact-link">+91 8336001208</a>
-        </div>
-        <div class="contact-item">
-          <span class="contact-icon">🌐</span>
-          <a href="https://book-chapter-tinyml.vercel.app" target="_blank" class="contact-link">book-chapter-tinyml.vercel.app</a>
-        </div>
-      </div>
-    </div>
-
-  </aside>
-</div>
-
-<!-- ──────────────── FOOTER ──────────────── -->
-<footer class="footer">
-  <div>
-    &copy; 2026 <strong style="color:rgba(255,255,255,0.7);">TinyML-Enabled IoT Systems: Recent Advances</strong> — Bentham Science Publishers
-  </div>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;">
-     <a href="https://forms.gle/AYdHETxwhza8ztQK7" target="_blank">Google Form</a>
-    <a href="mailto:editors.ratml2026@gmail.com">Contact Editors</a>
-  </div>
-</footer>
-
-<script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-
-  reveals.forEach((el, i) => {
-    el.style.transitionDelay = (i % 4) * 0.08 + 's';
-    io.observe(el);
-  });
-</script>
 </body>
 </html>
